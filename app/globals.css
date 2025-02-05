@@ -19,3 +19,48 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Tạo hiệu ứng sao trong CSS mà không cần thẻ div */
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: twinkle 5s ease-in-out infinite;
+  pointer-events: none; 
+  z-index: -1;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(0.5);
+  }
+}
+
+main {
+  position: relative;
+  overflow: hidden;
+  z-index: 1; 
+}
+
+main span.star {
+  top: calc(100% * var(--random-y));
+  left: calc(100% * var(--random-x));
+  width: calc(1px + (var(--random-size) * 1px));
+  height: calc(1px + (var(--random-size) * 1px));
+  animation: twinkle calc(3s + (var(--random-duration) * 1s)) ease-in-out infinite;
+}
+
+.hero-section {
+  position: relative;
+  z-index: 2;
+}
