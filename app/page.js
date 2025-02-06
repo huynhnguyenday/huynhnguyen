@@ -62,7 +62,7 @@ export default function Home() {
       {/* Dark/Light Mode Toggle Button */}
       <button
         onClick={handleToggle}
-        className="absolute top-40 lg:top-80 h-10 w-14 text-white group hover:w-32 right-0 flex items-center justify-center p-2 bg-gradient-to-r from-purple-400 hover:from-violet-800 hover:to-purple-400 to-violet-800 text-2xl border-none shadow-none rounded-l-full transition-all duration-300"
+        className="fixed top-52 lg:top-80 h-10 w-14 text-white group hover:w-32 right-0 flex items-center justify-center p-2 bg-gradient-to-r from-purple-400 hover:from-violet-800 hover:to-purple-400 to-violet-800 text-2xl border-none shadow-none rounded-l-full transition-all duration-300"
       >
         <div className="flex items-left">
           {isDarkMode ? (

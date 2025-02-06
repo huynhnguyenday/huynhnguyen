@@ -19,7 +19,7 @@ const HeroSection = ({ isDarkMode }) => {
             Hi, I am Huỳnh
           </h1>
           <h2
-            className={`text-4xl lg:text-6xl mb-10 font-extrabold text-transparent bg-clip-text ${
+            className={`text-5xl lg:text-6xl mb-10 font-extrabold text-transparent bg-clip-text ${
               isDarkMode
                 ? "bg-gradient-to-r from-purple-400 to-white"
                 : "bg-gradient-to-r from-purple-400 to-black"
@@ -35,7 +35,7 @@ const HeroSection = ({ isDarkMode }) => {
               alt="Background"
               width={250}
               height={220}
-              className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-900 hover:border-purple-950 transition-all duration-300"
+              className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-900 hover:border-purple-400 transition-all duration-300"
             />
           </div>
           <p
