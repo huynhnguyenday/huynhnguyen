@@ -57,8 +57,8 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto px-12 py-6 transition-all duration-300">
-      <NavSection isDarkMode={isDarkMode} />
+    <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto lg:px-12 lg:py-2 transition-all duration-300">
+      
       <HeroSection isDarkMode={isDarkMode} />
 
       {/* Dark/Light Mode Toggle Button */}

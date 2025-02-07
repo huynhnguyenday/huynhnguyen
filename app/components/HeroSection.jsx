@@ -4,15 +4,114 @@ import { MdOutlineFileDownload } from "react-icons/md";
 import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { FaBarsStaggered } from "react-icons/fa6";
+import { FaXmark } from "react-icons/fa6";
 
 const HeroSection = ({ isDarkMode }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
+  
   return (
     <section>
-      <div className="grid grid-cols-1 lg:grid-cols-12 mt-28 lg:mt-36">
+      {/* Navbar */}
+      <nav className="flex bg-transparent items-center lg:py-4 top-0 left-0 w-full z-50">
+        {/* Logo & Email */}
+        <div className="flex items-center lg:ml-20 ml-4 my-4 lg:my-2">
+          <span
+            className={`text-7xl font-bold ${
+              isDarkMode ? "text-white" : "text-purple-400"
+            }`}
+          >
+            H
+          </span>
+          <span
+            className={`hidden lg:block text-base ml-8 font-sora font-medium ${
+              isDarkMode ? "text-white" : "text-[#2A1454]"
+            }`}
+          >
+            huynhbutforwork@gmail.com
+          </span>
+        </div>
+
+        {/* Navigation Links (Desktop) */}
+        <div className="hidden md:flex ml-[300px] gap-14 text-base font-bold font-sora">
+          {[
+            { href: "#about", label: "Introduce" },
+            { href: "#skills", label: "Skills" },
+            { href: "#work", label: "Works" },
+            { href: "#contact", label: "Contact" },
+          ].map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`relative group ${
+                isDarkMode ? "text-white" : "text-[#2A1454]"
+              } transition`}
+            >
+              {link.label}
+              <span className="absolute left-0 bottom-[-4px] rounded-full w-0 h-[3px] bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          ))}
+        </div>
+
+        {/* Hire Me Button */}
+        <button className="ml-32 lg:ml-16 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left">
+          Hire Me!
+        </button>
+
+        {/* FAB Menu Button (Mobile) */}
+        <button
+          className={`md:hidden ml-6 text-[48px] ${
+            isDarkMode ? "text-white" : "text-purple-500"
+          }`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <FaXmark /> : <FaBarsStaggered />}
+        </button>
+      </nav>
+
+      {/* Mobile Navigation Fullscreen Overlay */}
+      {isOpen && (
+        <div className="fixed top-[94px] left-0 w-full h-[calc(100vh-75px)] bg-[rgb(42,20,84)] flex flex-col pl-6 pt-2 z-40">
+          {[
+            { href: "#about", label: "INTRODUCE" },
+            { href: "#skills", label: "SKILLS" },
+            { href: "#work", label: "WORKS" },
+            { href: "#contact", label: "CONTACT" },
+          ].map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-3xl text-white pt-6 pb-4 hover:text-gray-300 transition"
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+
+          {/* Email at the bottom */}
+          <div className="mt-auto pb-10 pl-6 text-start text-white text-lg">
+            huynhbutwork@gmail.com
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 mt-12 lg:mt-20 px-4 mb-12">
         {/* Phần chữ */}
         <div className="col-span-7 mx-2 lg:mt-8 lg:ml-20 lg:mr-0">
           <h1
-            className={`text-4xl lg:text-5xl mb-4 font-bold ${
+            className={`text-3xl lg:text-5xl mb-4 font-bold ${
               isDarkMode ? "text-white" : "text-[#2A1454]"
             }`}
           >
