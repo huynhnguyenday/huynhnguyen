@@ -69,7 +69,7 @@ export default function Home() {
         onClick={handleToggle}
         className="fixed top-52 lg:top-80 h-10 w-11 text-white group hover:w-28 right-0 flex items-center justify-start pl-3 border-none shadow-none rounded-l-full transition-all duration-300 font-sora 
     bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] 
-    bg-[length:300%_100%] bg-[position:30%] hover:bg-left"
+    bg-[length:300%_100%] bg-[position:30%] hover:bg-left z-50"
       >
         <div className="flex items-center w-24">
           {isDarkMode ? (

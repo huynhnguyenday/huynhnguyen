@@ -44,7 +44,7 @@ const SkillSection = ({ isDarkMode }) => {
           isDarkMode ? "text-white" : "text-[#2A1454]"
         } text-xl lg:text-2xl max-w-3xl mx-auto mb-20`}
       >
-        We put your ideas and thus your wishes in the form of a unique web
+        I put your ideas and thus your wishes in the form of a unique
         project that inspires you and your customers.
       </p>
 

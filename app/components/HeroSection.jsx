@@ -6,6 +6,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa";
 
 const HeroSection = ({ isDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,6 @@ const HeroSection = ({ isDarkMode }) => {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-
 
   useEffect(() => {
     if (isOpen) {
@@ -101,7 +101,7 @@ const HeroSection = ({ isDarkMode }) => {
             <a
               key={link.href}
               href={link.href}
-              className="text-3xl text-white pt-6 pb-4 hover:text-gray-300 transition"
+              className="text-xl text-white pt-6 pb-4 hover:text-gray-300 transition"
               onClick={() => setIsOpen(false)}
             >
               {link.label}
@@ -129,7 +129,7 @@ const HeroSection = ({ isDarkMode }) => {
             className={`text-5xl lg:text-6xl mb-10 font-extrabold text-transparent bg-clip-text ${
               isDarkMode
                 ? "bg-gradient-to-r from-purple-400 to-white"
-                : "bg-gradient-to-r from-purple-400 to-black"
+                : "bg-gradient-to-r from-purple-300 to-purple-900"
             }`}
           >
             Front End Developer.
@@ -157,66 +157,60 @@ const HeroSection = ({ isDarkMode }) => {
 
           {/* Chỉnh sửa flex để các icon nằm ngang bên phải nút Download */}
           <div className="flex flex-col lg:flex-row items-center mt-12">
+            {/* Nút Download CV */}
             <button
               className={`relative overflow-hidden ${
                 isDarkMode
                   ? "bg-black text-purple-400"
                   : "bg-white text-[#8750F7]"
-              } font-semibold border border-purple-400 px-8 py-4 text-xl rounded-full flex items-center transition-transform duration-300 hover:scale-95 group hover:text-white`}
+              } font-semibold border border-purple-400 px-8 py-4 text-xl rounded-full 
+    flex items-center transition-transform duration-300 hover:scale-95 group hover:text-white`}
             >
               <span className="relative z-10 flex items-center">
                 Download CV
-                <MdOutlineFileDownload className={`ml-2 text-4xl font-thin`} />
+                <MdOutlineFileDownload className="ml-2 text-4xl font-thin" />
               </span>
               <span className="absolute inset-0 bg-purple-400 scale-y-0 origin-bottom transition-transform duration-500 group-hover:scale-y-100"></span>
             </button>
 
+            {/* Các Icon Mạng Xã Hội */}
             <div className="flex lg:ml-6 gap-4 mt-6 lg:mt-0">
-              <a
-                href="https://www.facebook.com/imodnoliub"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button
-                  className={`w-10 h-10 flex items-center justify-center ${
-                    isDarkMode
-                      ? "bg-black text-purple-400"
-                      : "bg-white text-[#8750F7]"
-                  } border-solid border border-purple-400 rounded-full hover:bg-purple-400 hover:text-white transition-transform duration-200 hover:scale-95`}
+              {[
+                {
+                  icon: <FaFacebookF />,
+                  link: "https://www.facebook.com/imodnoliub",
+                },
+                {
+                  icon: <FaLinkedinIn />,
+                  link: "https://www.linkedin.com/in/hu%E1%BB%B3nh-nguy%E1%BB%85n-h%E1%BB%AFu/",
+                },
+                {
+                  icon: <FaGithub />,
+                  link: "https://github.com/huynhnguyenday",
+                },
+                {
+                  icon: <FaInstagram />,
+                  link: "https://www.instagram.com/hhuyn._.hn/",
+                },
+              ].map(({ icon, link }, index) => (
+                <a
+                  key={index}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <FaFacebookF className="text-xl hover:text-white" />
-                </button>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/hu%E1%BB%B3nh-nguy%E1%BB%85n-h%E1%BB%AFu/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button
-                  className={`w-10 h-10 flex items-center justify-center ${
-                    isDarkMode
-                      ? "bg-black text-purple-400"
-                      : "bg-white text-[#8750F7]"
-                  } border-solid border border-purple-400 rounded-full hover:bg-purple-400 hover:text-white transition-transform duration-200 hover:scale-95`}
-                >
-                  <FaLinkedinIn className="text-xl hover:text-white" />
-                </button>
-              </a>
-              <a
-                href="https://github.com/huynhnguyenday"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button
-                  className={`w-10 h-10 flex items-center justify-center ${
-                    isDarkMode
-                      ? "bg-black text-purple-400"
-                      : "bg-white text-[#8750F7]"
-                  } border-solid border border-purple-400 rounded-full hover:bg-purple-400 hover:text-white transition-transform duration-200 hover:scale-95`}
-                >
-                  <FaGithub className="text-xl hover:text-white" />
-                </button>
-              </a>
+                  <button
+                    className={`w-10 h-10 flex items-center justify-center ${
+                      isDarkMode
+                        ? "bg-black text-purple-400"
+                        : "bg-white text-[#8750F7]"
+                    } border border-purple-400 rounded-full 
+          hover:bg-purple-400 hover:text-white transition-transform duration-200 hover:scale-95`}
+                  >
+                    <span className="text-xl hover:text-white">{icon}</span>
+                  </button>
+                </a>
+              ))}
             </div>
           </div>
         </div>
