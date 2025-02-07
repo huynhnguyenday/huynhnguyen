@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from "react";
 import HeroSection from "./components/HeroSection";
 import NavSection from "./components/NavSection";
+import SkillSection from "./components/SkillSection";
 import { MdOutlineNightlight } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
+import FooterSection from "./components/FooterSection";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true); // State to track the mode (dark/light)
@@ -57,9 +59,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto lg:px-12 lg:py-2 transition-all duration-300">
-      
+    <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto lg:py-2 transition-all duration-300">
       <HeroSection isDarkMode={isDarkMode} />
+      <SkillSection isDarkMode={isDarkMode} />
+      <FooterSection isDarkMode={isDarkMode} />
 
       {/* Dark/Light Mode Toggle Button */}
       <button

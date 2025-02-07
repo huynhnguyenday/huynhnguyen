@@ -10,6 +10,14 @@ import { FaXmark } from "react-icons/fa6";
 const HeroSection = ({ isDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
@@ -23,7 +31,7 @@ const HeroSection = ({ isDarkMode }) => {
   }, [isOpen]);
   
   return (
-    <section>
+    <section id="about" className="lg:px-12">
       {/* Navbar */}
       <nav className="flex bg-transparent items-center lg:py-4 top-0 left-0 w-full z-50">
         {/* Logo & Email */}
@@ -47,21 +55,21 @@ const HeroSection = ({ isDarkMode }) => {
         {/* Navigation Links (Desktop) */}
         <div className="hidden md:flex ml-[300px] gap-14 text-base font-bold font-sora">
           {[
-            { href: "#about", label: "Introduce" },
-            { href: "#skills", label: "Skills" },
-            { href: "#work", label: "Works" },
-            { href: "#contact", label: "Contact" },
+            { id: "about", label: "Introduce" },
+            { id: "skills", label: "Skills" },
+            { id: "work", label: "Works" },
+            { id: "contact", label: "Contact" },
           ].map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <button
+              key={link.id}
+              onClick={() => handleScroll(link.id)}
               className={`relative group ${
                 isDarkMode ? "text-white" : "text-[#2A1454]"
               } transition`}
             >
               {link.label}
               <span className="absolute left-0 bottom-[-4px] rounded-full w-0 h-[3px] bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </button>
           ))}
         </div>
 
@@ -107,7 +115,7 @@ const HeroSection = ({ isDarkMode }) => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 mt-10 lg:mt-20 px-4 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 mt-10 lg:mt-20 px-1 mb-12">
         {/* Phần chữ */}
         <div className="col-span-7 mx-2 lg:mt-8 lg:ml-20 lg:mr-0">
           <h1
