@@ -66,13 +66,13 @@ const HeroSection = ({ isDarkMode }) => {
         </div>
 
         {/* Hire Me Button */}
-        <button className="ml-32 lg:ml-16 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left">
+        <button className="ml-24 lg:ml-16 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left">
           Hire Me!
         </button>
 
         {/* FAB Menu Button (Mobile) */}
         <button
-          className={`md:hidden ml-6 text-[48px] ${
+          className={`md:hidden ml-4 text-[48px] ${
             isDarkMode ? "text-white" : "text-purple-500"
           }`}
           onClick={() => setIsOpen(!isOpen)}
@@ -107,11 +107,11 @@ const HeroSection = ({ isDarkMode }) => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 mt-12 lg:mt-20 px-4 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 mt-10 lg:mt-20 px-4 mb-12">
         {/* Phần chữ */}
         <div className="col-span-7 mx-2 lg:mt-8 lg:ml-20 lg:mr-0">
           <h1
-            className={`text-3xl lg:text-5xl mb-4 font-bold ${
+            className={`text-2xl lg:text-5xl mb-4 font-bold ${
               isDarkMode ? "text-white" : "text-[#2A1454]"
             }`}
           >
@@ -140,11 +140,11 @@ const HeroSection = ({ isDarkMode }) => {
           <p
             className={`${
               isDarkMode ? "text-white" : "text-[#2A1454]"
-            } text-2xl lg:text-2xl`}
+            } text-xl lg:text-2xl`}
           >
-            I like to focus on making my website simple but easy to use and
-            optimized for users while still fully meeting the minimum uxui
-            architecture of the website.
+            I prioritize simple, user-friendly and performance-optimized website
+            design, while constantly applying the latest innovations in website
+            architecture.
           </p>
 
           {/* Chỉnh sửa flex để các icon nằm ngang bên phải nút Download */}
