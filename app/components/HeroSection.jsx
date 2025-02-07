@@ -8,7 +8,7 @@ import { FaGithub } from "react-icons/fa";
 const HeroSection = ({ isDarkMode }) => {
   return (
     <section>
-      <div className="grid grid-cols-1 lg:grid-cols-12 mt-10 lg:mt-28">
+      <div className="grid grid-cols-1 lg:grid-cols-12 mt-28 lg:mt-36">
         {/* Phần chữ */}
         <div className="col-span-7 mx-2 lg:mt-8 lg:ml-20 lg:mr-0">
           <h1
@@ -71,7 +71,7 @@ const HeroSection = ({ isDarkMode }) => {
                 rel="noopener noreferrer"
               >
                 <button
-                  className={`w-12 h-12 flex items-center justify-center ${
+                  className={`w-10 h-10 flex items-center justify-center ${
                     isDarkMode
                       ? "bg-black text-purple-400"
                       : "bg-white text-[#8750F7]"
@@ -86,7 +86,7 @@ const HeroSection = ({ isDarkMode }) => {
                 rel="noopener noreferrer"
               >
                 <button
-                  className={`w-12 h-12 flex items-center justify-center ${
+                  className={`w-10 h-10 flex items-center justify-center ${
                     isDarkMode
                       ? "bg-black text-purple-400"
                       : "bg-white text-[#8750F7]"
@@ -101,7 +101,7 @@ const HeroSection = ({ isDarkMode }) => {
                 rel="noopener noreferrer"
               >
                 <button
-                  className={`w-12 h-12 flex items-center justify-center ${
+                  className={`w-10 h-10 flex items-center justify-center ${
                     isDarkMode
                       ? "bg-black text-purple-400"
                       : "bg-white text-[#8750F7]"
