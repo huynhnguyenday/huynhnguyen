@@ -112,7 +112,7 @@ export default function Home() {
       {showGoTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#2A1454] text-purple-400 rounded-full shadow-lg transition-all duration-300"
+          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-transparent text-purple-400 rounded-full shadow-lg transition-all duration-300"
         >
           {/* SVG với vòng tròn nền và vòng tròn tiến trình */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
@@ -139,7 +139,7 @@ export default function Home() {
               style={{ transition: "stroke-dashoffset 0.2s ease-in-out" }}
             />
           </svg>
-          <GoArrowUp size={24} />
+          <GoArrowUp size={30} />
         </button>
       )}
 
