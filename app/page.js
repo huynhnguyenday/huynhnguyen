@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import HeroSection from "./components/HeroSection";
-import NavSection from "./components/NavSection";
 import SkillSection from "./components/SkillSection";
 import { MdOutlineNightlight } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import FooterSection from "./components/FooterSection";
+import SlideTabs from "./components/SlideTabs";
+
 
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState(true); // State to track the mode (dark/light)
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [showSlideTabs, setShowSlideTabs] = useState(false);
 
   // Toggle between dark and light mode
   const handleToggle = () => {
@@ -58,9 +60,30 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowSlideTabs(window.scrollY > 100); // Hiển thị khi cuộn xuống 100px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto lg:py-2 transition-all duration-300">
       <HeroSection isDarkMode={isDarkMode} />
+      {/* SlideTabs - Fixed nhưng chỉ hiển thị khi cuộn */}
+      <div
+        className={`fixed z-40 top-5 left-0 w-full transition-all duration-300 
+    ${
+      showSlideTabs
+        ? "opacity-100 translate-y-0"
+        : "opacity-0 -translate-y-full"
+    }
+  `}
+      >
+        <SlideTabs isDarkMode={isDarkMode} />
+      </div>
       <SkillSection isDarkMode={isDarkMode} />
       <FooterSection isDarkMode={isDarkMode} />
 
@@ -92,3 +115,4 @@ export default function Home() {
     </main>
   );
 }
+

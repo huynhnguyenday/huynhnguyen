@@ -110,7 +110,7 @@ const HeroSection = ({ isDarkMode }) => {
 
           {/* Email at the bottom */}
           <div className="mt-auto pb-28 text-start text-white text-lg">
-            huynhbutwork@gmail.com
+            huynhbutforwork@gmail.com
           </div>
         </div>
       )}

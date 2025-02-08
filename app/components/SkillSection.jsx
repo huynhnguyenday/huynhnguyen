@@ -77,7 +77,7 @@ const SkillSection = ({ isDarkMode }) => {
                 className={`group flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-300 w-40 h-40 lg:w-48 lg:h-48 border border-transparent  
     ${
       isDarkMode
-        ? "bg-[rgb(20,11,28)] hover:bg-[rgb(135,80,247)] hover:border-purple-400 hover:bg-opacity-50 hover:backdrop-blur-lg text-white"
+        ? "bg-[rgb(29,17,40)] hover:bg-[rgb(135,80,247)] hover:border-purple-400 hover:bg-opacity-50 hover:backdrop-blur-lg text-white"
         : "bg-white hover:bg-[rgb(42,20,84)] hover:border-none text-[#2A1454] hover:text-purple-400"
     }`}
               >
