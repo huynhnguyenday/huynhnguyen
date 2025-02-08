@@ -44,8 +44,8 @@ const SkillSection = ({ isDarkMode }) => {
           isDarkMode ? "text-white" : "text-[#2A1454]"
         } text-xl lg:text-2xl max-w-3xl mx-auto mb-20`}
       >
-        I put your ideas and thus your wishes in the form of a unique
-        project that inspires you and your customers.
+        I put your ideas and thus your wishes in the form of a unique project
+        that inspires you and your customers.
       </p>
 
       <div
@@ -77,7 +77,7 @@ const SkillSection = ({ isDarkMode }) => {
                 className={`group flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-300 w-40 h-40 lg:w-48 lg:h-48 border border-transparent  
     ${
       isDarkMode
-        ? "bg-[rgb(29,17,40)] hover:bg-[rgb(135,80,247)] hover:border-purple-400 hover:bg-opacity-50 hover:backdrop-blur-lg text-white"
+        ? "lg:bg-[rgb(20,11,28)] bg-[rgb(29,17,40)] hover:bg-[rgb(135,80,247)] hover:border-purple-400 hover:bg-opacity-50 hover:backdrop-blur-lg text-white"
         : "bg-white hover:bg-[rgb(42,20,84)] hover:border-none text-[#2A1454] hover:text-purple-400"
     }`}
               >
