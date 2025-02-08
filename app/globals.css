@@ -67,3 +67,25 @@ main span.star {
   z-index: 2;
 }
 
+/* Scrollbar chung cho toàn bộ trang */
+::-webkit-scrollbar {
+  width: 8px; /* Độ rộng thanh scrollbar */
+  height: 8px; /* Dùng cho thanh scrollbar ngang */
+}
+
+/* Thanh cuộn dọc (track) */
+::-webkit-scrollbar-track {
+  background: rgb(42, 20, 84); 
+  border-radius: 4px;
+}
+
+/* Cục kéo scrollbar (thumb) */
+::-webkit-scrollbar-thumb {
+  background: rgb(135, 80, 247);
+  border-radius: 4px;
+}
+
+/* Hover vào scrollbar để đậm hơn */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(135, 80, 247, 0.8);
+}

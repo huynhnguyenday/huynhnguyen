@@ -5,6 +5,7 @@ import HeroSection from "./components/HeroSection";
 import SkillSection from "./components/SkillSection";
 import FooterSection from "./components/FooterSection";
 import SlideTabs from "./components/SlideTabs";
+import ContactSection from "./components/ContactSection";
 import { MdOutlineNightlight } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import { GoArrowUp } from "react-icons/go";
@@ -72,19 +73,22 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const pageHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollY / pageHeight) * 100;
+  const scrollProgressRef = { current: 0 };
 
-      setShowGoTop(scrollY > 100);
-      setScrollProgress(scrollPercent);
-    };
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollY / pageHeight) * 100;
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    scrollProgressRef.current = scrollPercent;
+    setScrollProgress(scrollPercent); // Cập nhật UI nhưng không gây render lại quá nhiều
+    setShowGoTop(scrollPercent > 1);
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -93,19 +97,21 @@ export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto lg:py-2 transition-all duration-300">
       <HeroSection isDarkMode={isDarkMode} />
+      
       {/* SlideTabs - Fixed nhưng chỉ hiển thị khi cuộn */}
       <div
         className={`fixed z-40 top-5 left-0 w-full transition-all duration-300 
-    ${
-      showSlideTabs
-        ? "opacity-100 translate-y-0"
-        : "opacity-0 -translate-y-full"
-    }
+          ${
+            showSlideTabs
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-full"
+          }
   `}
       >
         <SlideTabs isDarkMode={isDarkMode} />
       </div>
       <SkillSection isDarkMode={isDarkMode} />
+      <ContactSection isDarkMode={isDarkMode}/>
       <FooterSection isDarkMode={isDarkMode} />
 
       {/* Nút Go To Top */}
