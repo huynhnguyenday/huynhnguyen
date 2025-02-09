@@ -65,7 +65,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowSlideTabs(window.scrollY > 100); // Hiển thị khi cuộn xuống 100px
+      setShowSlideTabs(window.scrollY > 300); // Hiển thị khi cuộn xuống 100px
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -118,7 +118,7 @@ export default function Home() {
       {showGoTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-3 right-3 lg:bottom-6 lg:right-6 z-50 flex items-center justify-center w-10 h-10 lg:w-14 lg:h-14 bg-transparent text-purple-400 rounded-full shadow-lg transition-all duration-300"
+          className="fixed bottom-3 right-3 lg:bottom-6 lg:right-6 z-40 flex items-center justify-center w-10 h-10 lg:w-14 lg:h-14 bg-transparent text-purple-400 rounded-full shadow-lg transition-all duration-300"
         >
           {/* SVG với vòng tròn nền và vòng tròn tiến trình */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">

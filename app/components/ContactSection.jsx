@@ -73,7 +73,7 @@ const ContactSection = ({isDarkMode}) => {
                   Address
                 </p>
                 <p
-                  className={`text-lg lg:text-xl font-sora w-[250px] lg:w-[300px] ${
+                  className={`text-lg lg:text-xl w-[250px] lg:w-[300px] ${
                     isDarkMode ? "text-white" : "text-[rgb(20,12,28)]"
                   }`}
                 >
@@ -85,8 +85,8 @@ const ContactSection = ({isDarkMode}) => {
 
           {/* Phần form nhập thông tin - Mobile nằm dưới, PC nằm trái */}
           <div
-            className={`shadow-lg rounded-3xl p-3 w-full md:w-1/2 lg:p-10 mb-14 lg: mb-10 ${
-              isDarkMode ? "bg-[rgb(20,12,28)]" : "bg-white"
+            className={`shadow-lg rounded-3xl p-3 w-full md:w-1/2 lg:p-10 mb-14 lg:mb-10 ${
+              isDarkMode ? "bg-[rgb(29,17,40)] lg:bg-[rgb(20,12,28)]" : "bg-white"
             }`}
           >
             <h1
