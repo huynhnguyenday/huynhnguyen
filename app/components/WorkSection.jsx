@@ -1,34 +1,49 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { GoArrowDownLeft } from "react-icons/go";
 
 const projects = [
   {
     src: "/image/1.png",
     name: "BamosCoffe",
     type: "web",
-    desc: "Website for coffee",
+    desc: "Convenient water sales website with admin page.",
+    tech: [
+      "/image/react.svg",
+      "/image/node.svg",
+      "/image/tailwind.svg",
+      "/image/mongo.svg",
+    ],
   },
   {
     src: "/image/2.png",
     name: "GasManagement",
     type: "mobile",
-    desc: "App Java mobile",
+    desc: "Gas bill management app.",
+    tech: ["/image/java.svg", "/image/sql.svg"],
   },
   {
     src: "/image/3.png",
     name: "Todolist",
     type: "web",
     desc: "Website for todolist",
+    tech: [
+      "/image/react.svg",
+      "/image/nextjs.svg",
+      "/image/node.svg",
+      "/image/mongo.svg",
+    ],
   },
   {
     src: "/image/4.png",
-    name: "Landingpage",
+    name: "Apple",
     type: "web",
-    desc: "Website for landing page",
+    desc: "Landing page about Iphone.",
+    tech: ["/image/html.svg", "/image/css.svg", "/image/bootstrap.svg"],
   },
 ];
 
-const WorkSection = ({isDarkMode}) => {
+const WorkSection = ({ isDarkMode }) => {
   const [activeTab, setActiveTab] = useState("all");
 
   const filteredProjects =
@@ -48,7 +63,7 @@ const WorkSection = ({isDarkMode}) => {
         My Recent Works
       </h1>
       <p
-        className={` text-lg max-w-xl mb-8 ${
+        className={`text-lg max-w-xl mb-8 ${
           isDarkMode ? "text-white" : "text-[#2A1454]"
         }`}
       >
@@ -80,23 +95,43 @@ const WorkSection = ({isDarkMode}) => {
             key={index}
             className="relative group w-full lg:h-[500px] flex items-end justify-center bg-[rgb(29,17,40)] rounded-2xl overflow-hidden"
           >
-            <div className="relative w-[90%]  pt-8 flex items-end overflow-hidden">
+            {/* Tech Icons (Góc trên) */}
+            <div className="absolute top-3 lg:top-5 left-4 flex space-x-[-5px] z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {project.tech.map((icon, i) => (
+                <div
+                  key={i}
+                  className="w-9 h-9 lg:w-10 lg:h-10 flex items-center justify-center bg-[#2A1454] rounded-full border border-purple-900"
+                >
+                  <Image src={icon} alt="tech-icon" width={24} height={24} />
+                </div>
+              ))}
+            </div>
+
+            <div className="relative w-[90%] pt-8 flex items-end overflow-hidden">
               <Image
                 src={project.src}
                 alt={project.name}
                 width={500}
                 height={300}
-                className=" lg:w-[550px] lg:h-[460px] transition-transform duration-300 "
+                className="lg:w-[550px] lg:h-[460px] transition-transform duration-300"
               />
             </div>
+
             {/* Overlay */}
-            <div className="absolute bottom-3 left-3 right-3 lg:left-5 lg:right-5 rounded-2xl bg-gradient-to-r from-[#8750F7] to-[#2A1454] bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 className="text-2xl lg:text-4xl font-semibold font-sora pb-3 pt-5 pl-5 flex text-start">
-                {project.name}
-              </h3>
-              <p className="text-sm lg:text-base font-sora pb-5 pl-5 flex text-start">
-                {project.desc}
-              </p>
+            <div className="absolute bottom-1 lg:bottom-4 left-3 right-3 lg:left-5 lg:right-5 rounded-2xl bg-gradient-to-r from-[#8750F7] to-[#2A1454] bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 lg:p-5">
+              <div className="flex flex-col items-start">
+                <h3 className="text-2xl lg:text-4xl font-semibold font-sora lg:pb-3 text-left">
+                  {project.name}
+                </h3>
+                <p className="text-sm lg:text-base w-60 lg:w-auto font-sora text-left">
+                  {project.desc}
+                </p>
+              </div>
+              <GoArrowDownLeft
+                className="absolute top-4 lg:top-9 right-3 lg:right-5 text-3xl lg:text-5xl 
+             transform transition-transform duration-700 
+             rotate-0 group-hover:rotate-180"
+              />
             </div>
           </div>
         ))}
