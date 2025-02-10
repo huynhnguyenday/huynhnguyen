@@ -27,7 +27,7 @@ const SkillSection = ({ isDarkMode }) => {
     <section
       id="skills"
       className={`text-center pt-16 lg:pt-24 pb-24 
-        ${isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"}`}
+        ${isDarkMode ? "bg-transparent" : "bg-[rgb(246,243,252)]"}`}
     >
       <h1
         className={`text-5xl lg:text-6xl mb-6 font-extrabold text-transparent bg-clip-text 
