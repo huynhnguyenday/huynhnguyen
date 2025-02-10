@@ -16,10 +16,13 @@ const SlideTabs = ({ isDarkMode }) => {
   });
 
   const [activeSection, setActiveSection] = useState(""); // Lưu tab đang active
+  const [clickedSection, setClickedSection] = useState(null); // Lưu tab được click
   const tabRefs = useRef({});
 
   // Xử lý cuộn tới phần tương ứng
   const handleScroll = (id) => {
+    setClickedSection(id); // Đánh dấu tab được click
+    setActiveSection(id); // Cập nhật tab active
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -29,6 +32,8 @@ const SlideTabs = ({ isDarkMode }) => {
   // Theo dõi vị trí scroll và cập nhật active tab
   useEffect(() => {
     const handleScroll = () => {
+      if (clickedSection) return; // Nếu đã click, không tự động cập nhật lại
+
       let currentSection = "";
       let minDistance = window.innerHeight;
 
@@ -59,10 +64,11 @@ const SlideTabs = ({ isDarkMode }) => {
     handleScroll(); // Gọi ngay khi load trang để cập nhật vị trí ban đầu
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [clickedSection]);
 
   // Khi rời chuột khỏi tab, đặt lại con trỏ về vị trí của tab đang active
   const handleMouseLeave = () => {
+    if (clickedSection) return; // Nếu đã click vào tab, không reset vị trí nữa
     if (activeSection && tabRefs.current[activeSection]) {
       const ref = tabRefs.current[activeSection];
       const { width } = ref.getBoundingClientRect();
@@ -123,7 +129,7 @@ const Tab = ({ id, children, setPosition, onClick, tabRefs }) => {
           opacity: 1,
         });
       }}
-      onClick={onClick} 
+      onClick={onClick}
       className="relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:py-2 md:text-base"
     >
       {children}
