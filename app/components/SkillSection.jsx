@@ -8,12 +8,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const skills = [
-  { src: "/image/CSS3.png", name: "CSS3" },
-  { src: "/image/HTML5.png", name: "HTML5" },
   { src: "/image/Tailwind.png", name: "Tailwind" },
   { src: "/image/js.png", name: "JavaScript" },
   { src: "/image/react.png", name: "React" },
   { src: "/image/Node.png", name: "Node.js" },
+  { src: "/image/CSS3.png", name: "CSS3" },
+  { src: "/image/HTML5.png", name: "HTML5" },
+  { src: "/image/bootstrap.png", name: "Bootstrap" },
   { src: "/image/Java.png", name: "Java" },
   { src: "/image/Sql.png", name: "SQL" },
   { src: "/image/MongoDB.png", name: "MongoDB" },

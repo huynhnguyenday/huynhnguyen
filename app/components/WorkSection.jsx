@@ -4,7 +4,7 @@ import { GoArrowDownLeft } from "react-icons/go";
 
 const projects = [
   {
-    src: "/image/workbamos.png",
+    src: "/image/workbamos.jpeg",
     name: "BamosCoffe",
     type: "web",
     desc: "Convenient water sales website with admin page.",
@@ -14,13 +14,25 @@ const projects = [
       "/image/tailwind.svg",
       "/image/mongo.svg",
     ],
+    links: [
+      {
+        icon: "/image/github.svg",
+        url: "https://github.com/huynhnguyenday/WebBamosCoffee",
+      },
+    ],
   },
   {
-    src: "/image/2.png",
+    src: "/image/workgas.png",
     name: "GasManagement",
     type: "mobile",
     desc: "Gas bill management app.",
     tech: ["/image/java.svg", "/image/sql.svg"],
+    links: [
+      {
+        icon: "/image/github.svg",
+        url: "https://github.com/huynhnguyenday/Mobile-application",
+      },
+    ],
   },
   {
     src: "/image/3.png",
@@ -33,13 +45,26 @@ const projects = [
       "/image/node.svg",
       "/image/mongo.svg",
     ],
+    links: [
+      { icon: "/image/global.svg", url: "https://your-todolist-website.com" },
+      {
+        icon: "/image/github.svg",
+        url: "https://github.com/your-todolist-repo",
+      },
+    ],
   },
   {
-    src: "/image/workapple.png",
+    src: "/image/workapple2.png",
     name: "Apple",
     type: "web",
-    desc: "Landing page about Iphone.",
+    desc: "Landing page about iPhone.",
     tech: ["/image/html.svg", "/image/css.svg", "/image/bootstrap.svg"],
+    links: [
+      {
+        icon: "/image/github.svg",
+        url: "https://github.com/huynhnguyenday/Landingpage",
+      },
+    ],
   },
 ];
 
@@ -104,6 +129,27 @@ const WorkSection = ({ isDarkMode }) => {
                 >
                   <Image src={icon} alt="tech-icon" width={24} height={24} />
                 </div>
+              ))}
+            </div>
+
+            {/* Links Icons (Góc trên bên phải) */}
+            <div className="absolute top-3 lg:top-5 right-4 flex space-x-[-2px] z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {project.links.map((link, i) => (
+                <a
+                  key={i}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="w-9 h-9 lg:w-10 lg:h-10 flex items-center justify-center bg-[#2A1454] rounded-full border border-purple-900 hover:bg-purple-800 transition-all duration-300">
+                    <Image
+                      src={link.icon}
+                      alt="link-icon"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                </a>
               ))}
             </div>
 
