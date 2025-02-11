@@ -18,6 +18,7 @@ const SlideTabs = ({ isDarkMode }) => {
   const [activeSection, setActiveSection] = useState(""); // Lưu tab đang active
   const [clickedSection, setClickedSection] = useState(null); // Lưu tab được click
   const tabRefs = useRef({});
+  const timeoutRef = useRef(null);
 
   // Xử lý cuộn tới phần tương ứng
   const handleScroll = (id) => {
@@ -27,6 +28,14 @@ const SlideTabs = ({ isDarkMode }) => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+
+    // Đặt lại timer để quay về tab cũ sau 2 giây nếu không có thao tác mới
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setClickedSection(null); // Xóa trạng thái click để quay về tab active cũ
+    }, 500);
   };
 
   // Theo dõi vị trí scroll và cập nhật active tab

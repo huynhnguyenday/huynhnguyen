@@ -4,7 +4,7 @@ import { GoArrowDownLeft } from "react-icons/go";
 
 const projects = [
   {
-    src: "/image/1.png",
+    src: "/image/workbamos.png",
     name: "BamosCoffe",
     type: "web",
     desc: "Convenient water sales website with admin page.",
@@ -35,7 +35,7 @@ const projects = [
     ],
   },
   {
-    src: "/image/4.png",
+    src: "/image/workapple.png",
     name: "Apple",
     type: "web",
     desc: "Landing page about Iphone.",

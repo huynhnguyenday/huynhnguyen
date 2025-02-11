@@ -74,7 +74,10 @@ const HeroSection = ({ isDarkMode }) => {
         </div>
 
         {/* Hire Me Button */}
-        <button className="ml-24 lg:ml-16 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left">
+        <button
+          onClick={() => handleScroll("contact")} // Thêm sự kiện này
+          className="ml-24 lg:ml-16 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left"
+        >
           Hire Me!
         </button>
 
