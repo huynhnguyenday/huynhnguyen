@@ -72,6 +72,10 @@ const projects = [
     ],
     links: [
       {
+        icon: "/image/figma.svg",
+        url: "https://www.figma.com/design/LEPiW8Lw0VMcqVYKJEPiLL/GasManagement?node-id=3-1319&t=8fomn78iU0YkWjgC-1",
+      },
+      {
         icon: "/image/github.svg",
         url: "https://github.com/huynhnguyenday/Mobile-application",
       },
@@ -101,12 +105,17 @@ const projects = [
   },
   {
     src: "/image/workapple2.png",
-    name: "Apple",
+    name: "iPhone",
     type: "web",
     desc: "Landing page about iPhone.",
     descrip1:
       "The iPhone introduction website provides a comprehensive overview of the latest models, featuring detailed information on pricing, product specifications, and the newest updates from Apple. Users can explore various color options and configurations available for each version, ensuring they find the perfect match for their style and needs. The site also keeps customers informed about the latest news and innovations, helping them stay up-to-date with the most advanced technology trends.",
-    img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
+    img: [
+      "/image/ip1.png",
+      "/image/ip2.png",
+      "/image/ip3.png",
+      "/image/ip4.png",
+    ],
     tech: ["/image/html.svg", "/image/css.svg", "/image/bootstrap.svg"],
     links: [
       {
