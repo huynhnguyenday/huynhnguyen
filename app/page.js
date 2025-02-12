@@ -16,12 +16,16 @@ export default function Home() {
   const [showSlideTabs, setShowSlideTabs] = useState(false);
   const [showGoTop, setShowGoTop] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isVietMode, setIsVietMode] = useState(() => {
-    const savedLanguage = localStorage.getItem("isVietMode");
-    return savedLanguage ? JSON.parse(savedLanguage) : true; // Mặc định là true nếu không có trong localStorage
-  });
+  const [isVietMode, setIsVietMode] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(0);
 
-  // Đọc từ localStorage khi component được load
+  useEffect(() => {
+    const updateWidth = () => setWindowWidth(window.innerWidth);
+    updateWidth(); // Lấy width lần đầu tiên khi load trang
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
   useEffect(() => {
     const savedLanguage = localStorage.getItem("isVietMode");
     if (savedLanguage) {
@@ -193,7 +197,7 @@ export default function Home() {
               style={{ transition: "stroke-dashoffset 0.2s ease-in-out" }}
             />
           </svg>
-          <GoArrowUp size={window.innerWidth >= 1024 ? 30 : 20} />
+          <GoArrowUp size={windowWidth >= 1024 ? 30 : 20} />
         </button>
       )}
 
