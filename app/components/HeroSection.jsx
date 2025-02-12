@@ -10,6 +10,23 @@ import { FaInstagram } from "react-icons/fa";
 
 const HeroSection = ({ isDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVietMode, setIsVietMode] = useState(true);
+
+  const toggleLanguage = () => {
+    setIsVietMode((prevMode) => !prevMode);
+  };
+
+  // Lưu trạng thái ngôn ngữ vào localStorage
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("isVietMode");
+    if (savedLanguage) {
+      setIsVietMode(JSON.parse(savedLanguage));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("isVietMode", JSON.stringify(isVietMode));
+  }, [isVietMode]);
 
   const handleScroll = (id) => {
     const element = document.getElementById(id);
@@ -29,7 +46,7 @@ const HeroSection = ({ isDarkMode }) => {
       document.body.classList.remove("overflow-hidden");
     };
   }, [isOpen]);
-  
+
   return (
     <section id="about" className="lg:px-12">
       {/* Navbar */}
@@ -55,10 +72,10 @@ const HeroSection = ({ isDarkMode }) => {
         {/* Navigation Links (Desktop) */}
         <div className="hidden md:flex ml-[300px] gap-14 text-base font-bold font-sora">
           {[
-            { id: "about", label: "Introduce" },
-            { id: "skills", label: "Skills" },
-            { id: "work", label: "Works" },
-            { id: "contact", label: "Contact" },
+            { id: "about", label: isVietMode ? "Giới thiệu" : "Introduce" },
+            { id: "skills", label: isVietMode ? "Kỹ năng" : "Skills" },
+            { id: "work", label: isVietMode ? "Dự án" : "Works" },
+            { id: "contact", label: isVietMode ? "Liên hệ" : "Contact" },
           ].map((link) => (
             <button
               key={link.id}
@@ -73,12 +90,23 @@ const HeroSection = ({ isDarkMode }) => {
           ))}
         </div>
 
+        {/* Flag Switcher */}
+        <div className="px-10 text-2xl cursor-pointer" onClick={toggleLanguage}>
+          <Image
+            src={isVietMode ? "/image/flagviet.svg" : "/image/flagusa.svg"}
+            alt="Language Flag"
+            width={32}
+            height={32}
+            className="transition-transform duration-300 hover:scale-110"
+          />
+        </div>
+
         {/* Hire Me Button */}
         <button
           onClick={() => handleScroll("contact")} // Thêm sự kiện này
-          className="ml-24 lg:ml-16 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left"
+          className="ml-0 lg:ml-0 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left"
         >
-          Hire Me!
+          {isVietMode ? "Liên hệ!" : "Hire Me!"}
         </button>
 
         {/* FAB Menu Button (Mobile) */}
@@ -96,10 +124,10 @@ const HeroSection = ({ isDarkMode }) => {
       {isOpen && (
         <div className="fixed top-[94px] left-0 w-full h-[calc(100vh-75px)] bg-[rgb(42,20,84)] flex flex-col pl-6 pt-2 z-40">
           {[
-            { href: "#about", label: "INTRODUCE" },
-            { href: "#skills", label: "SKILLS" },
-            { href: "#work", label: "WORKS" },
-            { href: "#contact", label: "CONTACT" },
+            { href: "#about", label: isVietMode ? "GIỚI THIỆU": "INTRODUCE" },
+            { href: "#skills", label: isVietMode ? "KỸ NĂNG" : "SKILLS" },
+            { href: "#work", label: isVietMode ? "DỰ ÁN" : "WORKS" },
+            { href: "#contact", label: isVietMode ? "LIÊN HỆ" : "CONTACT" },
           ].map((link) => (
             <a
               key={link.href}
@@ -126,16 +154,16 @@ const HeroSection = ({ isDarkMode }) => {
               isDarkMode ? "text-white" : "text-[#2A1454]"
             }`}
           >
-            Hi, I am Huỳnh
+            {isVietMode ? "Xin chào, em là Huỳnh" : "Hi, I am Huỳnh"}
           </h1>
           <h2
-            className={`text-5xl lg:text-6xl mb-10 font-extrabold text-transparent bg-clip-text ${
+            className={`text-5xl lg:text-6xl mb-10 font-extrabold font-sora text-transparent bg-clip-text ${
               isDarkMode
                 ? "bg-gradient-to-r from-purple-400 to-white"
                 : "bg-gradient-to-r from-purple-300 to-purple-900"
             }`}
           >
-            Front End Developer.
+            {isVietMode ? "Lập trình viên Front End." : "Front End Developer."}
           </h2>
 
           {/* Ảnh chỉ hiển thị trên mobile */}
@@ -153,9 +181,9 @@ const HeroSection = ({ isDarkMode }) => {
               isDarkMode ? "text-white" : "text-[#2A1454]"
             } text-xl lg:text-2xl`}
           >
-            I prioritize simple, user-friendly and performance-optimized website
-            design, while constantly applying the latest innovations in website
-            architecture.
+            {isVietMode
+              ? "Em ưu tiên thiết kế website đơn giản, dễ sử dụng và tối ưu hóa hiệu suất, đồng thời luôn áp dụng những cải tiến mới nhất trong kiến trúc website."
+              : "I prioritize simple, user-friendly and performance-optimized website design, while constantly applying the latest innovations in website architecture."}
           </p>
 
           {/* Chỉnh sửa flex để các icon nằm ngang bên phải nút Download */}
@@ -170,7 +198,7 @@ const HeroSection = ({ isDarkMode }) => {
     flex items-center transition-transform duration-300 hover:scale-95 group hover:text-white`}
             >
               <span className="relative z-10 flex items-center">
-                Download CV
+                {isVietMode ? "Tải xuống hồ sơ" : "Download CV"}
                 <MdOutlineFileDownload className="ml-2 text-4xl font-thin" />
               </span>
               <span className="absolute inset-0 bg-purple-400 scale-y-0 origin-bottom transition-transform duration-500 group-hover:scale-y-100"></span>
