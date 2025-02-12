@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const sections = [
-  { id: "about", label: "Introduce" },
-  { id: "skills", label: "Skills" },
-  { id: "work", label: "Works" },
-  { id: "contact", label: "Contact" },
-];
-
-const SlideTabs = ({ isDarkMode }) => {
+const SlideTabs = ({ isDarkMode, isVietMode }) => {
+  const sections = [
+    { id: "about", label: isVietMode ? "Giới thiệu" : "Introduce" },
+    { id: "skills", label: isVietMode ? "Kỹ năng" : "Skills" },
+    { id: "work", label: isVietMode ? "Dự án" : "Works" },
+    { id: "contact", label: isVietMode ? "Liên hệ" : "Contact" },
+  ];
+  
   const [position, setPosition] = useState({
     left: 0,
     width: 0,

@@ -16,6 +16,27 @@ export default function Home() {
   const [showSlideTabs, setShowSlideTabs] = useState(false);
   const [showGoTop, setShowGoTop] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isVietMode, setIsVietMode] = useState(() => {
+    const savedLanguage = localStorage.getItem("isVietMode");
+    return savedLanguage ? JSON.parse(savedLanguage) : true; // Mặc định là true nếu không có trong localStorage
+  });
+
+  // Đọc từ localStorage khi component được load
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("isVietMode");
+    if (savedLanguage) {
+      setIsVietMode(JSON.parse(savedLanguage));
+    }
+  }, []);
+
+  // Cập nhật localStorage khi isVietMode thay đổi
+  useEffect(() => {
+    localStorage.setItem("isVietMode", JSON.stringify(isVietMode));
+  }, [isVietMode]);
+
+  const handleLanguageToggle = () => {
+    setIsVietMode((prevMode) => !prevMode);
+  };
 
   // Toggle between dark and light mode
   const handleToggle = () => {
@@ -74,22 +95,23 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-  const scrollProgressRef = { current: 0 };
+    const scrollProgressRef = { current: 0 };
 
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-    const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollY / pageHeight) * 100;
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const pageHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollY / pageHeight) * 100;
 
-    scrollProgressRef.current = scrollPercent;
-    setScrollProgress(scrollPercent); // Cập nhật UI nhưng không gây render lại quá nhiều
-    setShowGoTop(scrollPercent > 1);
-  };
+      scrollProgressRef.current = scrollPercent;
+      setScrollProgress(scrollPercent); // Cập nhật UI nhưng không gây render lại quá nhiều
+      setShowGoTop(scrollPercent > 1);
+    };
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -97,8 +119,12 @@ export default function Home() {
 
   return (
     <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto lg:py-2 transition-all duration-300">
-      <HeroSection isDarkMode={isDarkMode} />
-      
+      <HeroSection
+        isDarkMode={isDarkMode}
+        isVietMode={isVietMode}
+        onLanguageToggle={handleLanguageToggle}
+      />
+
       {/* SlideTabs - Fixed nhưng chỉ hiển thị khi cuộn */}
       <div
         className={`fixed z-40 top-5 left-0 w-full transition-all duration-300 
@@ -109,12 +135,32 @@ export default function Home() {
           }
   `}
       >
-        <SlideTabs isDarkMode={isDarkMode} />
+        <SlideTabs
+          isDarkMode={isDarkMode}
+          isVietMode={isVietMode}
+          onLanguageToggle={handleLanguageToggle}
+        />
       </div>
-      <SkillSection isDarkMode={isDarkMode} />
-      <WorkSection isDarkMode={isDarkMode} />
-      <ContactSection isDarkMode={isDarkMode}/>
-      <FooterSection isDarkMode={isDarkMode} />
+      <SkillSection
+        isDarkMode={isDarkMode}
+        isVietMode={isVietMode}
+        onLanguageToggle={handleLanguageToggle}
+      />
+      <WorkSection
+        isDarkMode={isDarkMode}
+        isVietMode={isVietMode}
+        onLanguageToggle={handleLanguageToggle}
+      />
+      <ContactSection
+        isDarkMode={isDarkMode}
+        isVietMode={isVietMode}
+        onLanguageToggle={handleLanguageToggle}
+      />
+      <FooterSection
+        isDarkMode={isDarkMode}
+        isVietMode={isVietMode}
+        onLanguageToggle={handleLanguageToggle}
+      />
 
       {/* Nút Go To Top */}
       {showGoTop && (

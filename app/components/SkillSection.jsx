@@ -21,7 +21,7 @@ const skills = [
   { src: "/image/figma.png", name: "Figma" },
 ];
 
-const SkillSection = ({ isDarkMode }) => {
+const SkillSection = ({ isDarkMode, isVietMode }) => {
   const swiperRef = useRef(null);
 
   return (
@@ -31,22 +31,23 @@ const SkillSection = ({ isDarkMode }) => {
         ${isDarkMode ? "bg-transparent" : "bg-[rgb(246,243,252)]"}`}
     >
       <h1
-        className={`text-5xl lg:text-6xl mb-6 font-extrabold text-transparent bg-clip-text 
+        className={`text-5xl lg:text-6xl mb-6 lg:h-16 font-extrabold text-transparent bg-clip-text 
         ${
           isDarkMode
             ? "bg-gradient-to-r from-purple-400 to-white"
             : "bg-gradient-to-r from-purple-400 to-black"
         }`}
       >
-        My Skills
+        {isVietMode ? "Kỹ năng" : "My Skills"}
       </h1>
       <p
         className={`${
           isDarkMode ? "text-white" : "text-[#2A1454]"
         } text-xl lg:text-2xl max-w-3xl mx-auto mb-20`}
       >
-        I put your ideas and thus your wishes in the form of a unique project
-        that inspires you and your customers.
+        {isVietMode
+          ? "Tôi đặt hết ý tưởng và mong muốn của bạn vào trong dự án độc đáo và nó sẽ truyền cảm hứng cho bạn lẫn khách hàng của bạn."
+          : "I put your ideas and thus your wishes in the form of a unique project that inspires you and your customers."}
       </p>
 
       <div

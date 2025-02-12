@@ -8,21 +8,23 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
 
-const HeroSection = ({ isDarkMode }) => {
+const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isVietMode, setIsVietMode] = useState(true);
 
   const toggleLanguage = () => {
-    setIsVietMode((prevMode) => !prevMode);
+    onLanguageToggle(!isVietMode);
   };
 
-  // Lưu trạng thái ngôn ngữ vào localStorage
   useEffect(() => {
     const savedLanguage = localStorage.getItem("isVietMode");
-    if (savedLanguage) {
-      setIsVietMode(JSON.parse(savedLanguage));
+    if (savedLanguage !== null) {
+      onLanguageToggle(JSON.parse(savedLanguage));
+    } else {
+      // Nếu chưa có trong localStorage thì mặc định là tiếng Anh
+      onLanguageToggle(false);
     }
   }, []);
+
 
   useEffect(() => {
     localStorage.setItem("isVietMode", JSON.stringify(isVietMode));
@@ -106,7 +108,7 @@ const HeroSection = ({ isDarkMode }) => {
           onClick={() => handleScroll("contact")} // Thêm sự kiện này
           className="ml-0 lg:ml-0 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left"
         >
-          {isVietMode ? "Liên hệ!" : "Hire Me!"}
+          {isVietMode ? "Liên Hệ!" : "Hire Me!"}
         </button>
 
         {/* FAB Menu Button (Mobile) */}
@@ -124,7 +126,7 @@ const HeroSection = ({ isDarkMode }) => {
       {isOpen && (
         <div className="fixed top-[94px] left-0 w-full h-[calc(100vh-75px)] bg-[rgb(42,20,84)] flex flex-col pl-6 pt-2 z-40">
           {[
-            { href: "#about", label: isVietMode ? "GIỚI THIỆU": "INTRODUCE" },
+            { href: "#about", label: isVietMode ? "GIỚI THIỆU" : "INTRODUCE" },
             { href: "#skills", label: isVietMode ? "KỸ NĂNG" : "SKILLS" },
             { href: "#work", label: isVietMode ? "DỰ ÁN" : "WORKS" },
             { href: "#contact", label: isVietMode ? "LIÊN HỆ" : "CONTACT" },
@@ -157,7 +159,7 @@ const HeroSection = ({ isDarkMode }) => {
             {isVietMode ? "Xin chào, em là Huỳnh" : "Hi, I am Huỳnh"}
           </h1>
           <h2
-            className={`text-5xl lg:text-6xl mb-10 font-extrabold font-sora text-transparent bg-clip-text ${
+            className={`text-5xl lg:text-6xl mb-10 lg:h-16 font-extrabold font-sora text-transparent bg-clip-text ${
               isDarkMode
                 ? "bg-gradient-to-r from-purple-400 to-white"
                 : "bg-gradient-to-r from-purple-300 to-purple-900"
