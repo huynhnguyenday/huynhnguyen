@@ -12,8 +12,10 @@ const projects = [
     name: "BamosCoffe",
     type: "web",
     desc: "Convenient water sales website with admin page.",
-    descip:
-      "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
+    descrip1:
+      "The coffee shop website provides a modern and convenient shopping experience with an elegant, user-friendly interface. Customers can easily browse products with detailed descriptions and prices, add items to their cart, and securely pay online. The website also features news on promotions and events, store locator with integrated maps, and order history tracking for better spending management.",
+    descrip2:
+      "The powerful admin tool allows shop owners to manage products, news, and promotions easily. It supports real-time order tracking, customer management, and automated invoice and coupon distribution, optimizing marketing and enhancing customer care.",
     img: [
       "/image/1.png",
       "/image/2.png",
@@ -55,9 +57,19 @@ const projects = [
     type: "mobile",
     desc: "Gas bill management app.",
     tech: ["/image/java.svg", "/image/sql.svg"],
-    descip:
-      "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
-    img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
+    descrip1:
+      "The gas management app is designed to streamline billing and provide real-time updates on gas prices for Type 1 and Type 2. Users can easily manage invoices, track payment history, and explore detailed billing records using advanced search and filtering options. The app ensures accurate price updates, helping users stay informed about market changes.",
+    descrip2:
+      "Additionally, the app offers flexible settings that allow users to customize their experience, including toggling the display of prices and user information, as well as enabling or disabling background music. This personalized control enhances usability and user satisfaction.",
+    img: [
+      "/image/gas1.png",
+      "/image/gas2.png",
+      "/image/gas3.png",
+      "/image/gas4.png",
+      "/image/gas5.png",
+      "/image/gas6.png",
+      "/image/gas7.png",
+    ],
     links: [
       {
         icon: "/image/github.svg",
@@ -70,7 +82,7 @@ const projects = [
     name: "Todolist",
     type: "web",
     desc: "Website for todolist",
-    descip:
+    descrip1:
       "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
     img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
     tech: [
@@ -92,8 +104,8 @@ const projects = [
     name: "Apple",
     type: "web",
     desc: "Landing page about iPhone.",
-    descip:
-      "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
+    descrip1:
+      "The iPhone introduction website provides a comprehensive overview of the latest models, featuring detailed information on pricing, product specifications, and the newest updates from Apple. Users can explore various color options and configurations available for each version, ensuring they find the perfect match for their style and needs. The site also keeps customers informed about the latest news and innovations, helping them stay up-to-date with the most advanced technology trends.",
     img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
     tech: ["/image/html.svg", "/image/css.svg", "/image/bootstrap.svg"],
     links: [
@@ -175,7 +187,7 @@ const WorkSection = ({ isDarkMode }) => {
             className="relative group w-full lg:h-[500px] flex items-end justify-center bg-[rgb(29,17,40)] rounded-2xl overflow-hidden"
           >
             {/* Tech Icons (Góc trên) */}
-            <div className="absolute top-3 lg:top-5 left-4 flex space-x-[-5px] z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute top-3 lg:top-5 left-4 flex space-x-[-5px] z-30 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
               {project.tech.map((icon, i) => (
                 <div
                   key={i}
@@ -187,7 +199,7 @@ const WorkSection = ({ isDarkMode }) => {
             </div>
 
             {/* Links Icons (Góc trên bên phải) */}
-            <div className="absolute top-3 lg:top-5 right-4 flex space-x-[-2px] z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute top-3 lg:top-5 right-4 flex space-x-[-2px] z-30 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
               {project.links.map((link, i) => (
                 <a
                   key={i}
@@ -219,7 +231,7 @@ const WorkSection = ({ isDarkMode }) => {
 
             {/* Overlay */}
             <div
-              className="absolute bottom-1 lg:bottom-4 left-3 right-3 lg:left-5 lg:right-5 rounded-2xl bg-gradient-to-r from-[#8750F7] to-[#2A1454] bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 lg:p-5 cursor-pointer"
+              className="absolute bottom-1 lg:bottom-4 left-3 right-3 lg:left-5 lg:right-5 rounded-2xl bg-gradient-to-r from-[#8750F7] to-[#2A1454] bg-opacity-50 text-white lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 p-3 lg:p-5 cursor-pointer"
               onClick={() => setSelectedProject(project)}
             >
               <div className="flex flex-col items-start">
@@ -231,9 +243,8 @@ const WorkSection = ({ isDarkMode }) => {
                 </p>
               </div>
               <GoArrowDownLeft
-                className="absolute top-4 lg:top-9 right-3 lg:right-5 text-3xl lg:text-5xl 
-             transform transition-transform duration-700 
-             rotate-0 group-hover:rotate-180"
+                className="absolute top-6 lg:top-9 right-3 lg:right-5 text-4xl lg:text-5xl 
+                transform transition-transform duration-700 rotate-180 lg:rotate-0 lg:group-hover:rotate-180"
               />
             </div>
           </div>
@@ -242,70 +253,86 @@ const WorkSection = ({ isDarkMode }) => {
 
       {/* Drawer */}
       {selectedProject && (
-        <div className="fixed bottom-0 left-0 right-0 h-[85vh] bg-gray-900 text-white p-6 rounded-t-3xl shadow-lg overflow-y-auto transition-transform duration-500 z-50">
-          {/* Đặt absolute để nút luôn ở góc trên bên phải */}
-          <button
-            className="absolute top-4 right-4 text-3xl lg:text-5xl z-10"
-            onClick={() => setSelectedProject(null)}
+        <div
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" // Background mờ với hiệu ứng blur
+          onClick={() => setSelectedProject(null)} // Đóng khi click bên ngoài
+        >
+          <div
+            className="fixed bottom-0 left-0 right-0 h-[85vh] bg-gray-900 text-white p-6 rounded-t-3xl shadow-lg overflow-y-auto transition-transform duration-500 z-50"
+            onClick={(e) => e.stopPropagation()} // Ngăn không cho đóng khi click bên trong
           >
-            <IoClose />
-          </button>
+            {/* Đặt absolute để nút luôn ở góc trên bên phải */}
+            <button
+              className="absolute top-4 right-4 text-3xl lg:text-5xl z-10"
+              onClick={() => setSelectedProject(null)}
+            >
+              <IoClose />
+            </button>
 
-          {/* Tên dự án */}
-          <h1 className="text-4xl lg:text-6xl font-bold mt-5 lg:mt-4 mb-8 text-center">
-            {selectedProject.name}
-          </h1>
+            {/* Tên dự án */}
+            <h1 className="text-4xl lg:text-6xl font-bold mt-5 lg:mt-4 mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-white">
+              {selectedProject.name}
+            </h1>
 
-          {/* Nội dung drawer */}
-          <div className="flex flex-col items-center gap-6">
-            {/* Carousel */}
-            <div className="w-full flex justify-center">
-              <Swiper
-                spaceBetween={20}
-                slidesPerView={1.2}
-                className="lg:w-[70%] lg:h-[420px]"
-              >
-                {selectedProject.img.map((img, idx) => (
-                  <SwiperSlide key={idx} className="relative group">
-                    <Image
-                      src={img}
-                      alt={selectedProject.name}
-                      width={500}
-                      height={300}
-                      className="w-full object-cover rounded-lg cursor-pointer"
-                      onClick={() => setFullscreenImg(img)}
-                    />
-
-                    {/* Icon ZoomOutMap */}
-                    <div
-                      className="absolute bottom-2 lg:bottom-4 right-3 h-6 w-6 lg:h-10 lg:w-10 lg:text-2xl text-base flex justify-center items-center border border-gray-700 rounded-full transition-opacity duration-300 cursor-pointer"
-                      onClick={() => setFullscreenImg(img)}
-                    >
-                      <MdOutlineZoomOutMap className="text-black" />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-
-            {/* Tech Stack và Description */}
-            <div className="w-full lg:w-[70%] text-left">
-              {/* Tech Stack */}
-              <div className="flex justify-start space-x-4 mb-4">
-                {selectedProject.tech.map((icon, i) => (
-                  <Image
-                    key={i}
-                    src={icon}
-                    alt="tech-icon"
-                    width={32}
-                    height={32}
-                    className="object-contain"
-                  />
-                ))}
+            {/* Nội dung drawer */}
+            <div className="flex flex-col items-center gap-6">
+              {/* Carousel */}
+              <div className="w-full flex justify-center">
+                <Swiper
+                  spaceBetween={20}
+                  slidesPerView={1.2}
+                  className="lg:max-w-5xl"
+                >
+                  {selectedProject.img.map((img, idx) => (
+                    <SwiperSlide key={idx} className="relative group">
+                      <Image
+                        src={img}
+                        alt={selectedProject.name}
+                        width={500}
+                        height={300}
+                        className="w-full object-cover rounded-lg cursor-pointer"
+                        onClick={() => setFullscreenImg(img)}
+                      />
+                      <div
+                        className="absolute bottom-2 lg:top-3 lg:left-3 right-3 h-6 w-6 lg:h-10 lg:w-10 lg:text-2xl text-base flex justify-center items-center bg-gray-700 rounded-full transition-opacity duration-300 cursor-pointer"
+                        onClick={() => setFullscreenImg(img)}
+                      >
+                        <MdOutlineZoomOutMap className="text-white" />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
 
-              {/* Description */}
-              <p className="text-base lg:text-lg">{selectedProject.desc}</p>
+              {/* Tech Stack và Description */}
+              <div className="w-full lg:w-[70%] text-left">
+                <h2 className="text-2xl lg:text-4xl font-sora mb-5 font-bold">
+                  Technology
+                </h2>
+                <div className="flex justify-start space-x-4 mb-10 ml-4">
+                  {selectedProject.tech.map((icon, i) => (
+                    <Image
+                      key={i}
+                      src={icon}
+                      alt="tech-icon"
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
+                  ))}
+                </div>
+                <h2 className="text-2xl lg:text-4xl font-sora mb-8 font-bold">
+                  Project Description
+                </h2>
+                <div className="ml-4">
+                  <p className="text-base lg:text-lg font-sora mb-4">
+                    {selectedProject.descrip1}
+                  </p>
+                  <p className="text-base lg:text-lg font-sora mb-4">
+                    {selectedProject.descrip2}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
