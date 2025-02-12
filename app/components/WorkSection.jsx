@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { GoArrowDownLeft } from "react-icons/go";
+import { IoClose } from "react-icons/io5";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { MdOutlineZoomOutMap } from "react-icons/md";
 
 const projects = [
   {
@@ -8,6 +12,30 @@ const projects = [
     name: "BamosCoffe",
     type: "web",
     desc: "Convenient water sales website with admin page.",
+    descip:
+      "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
+    img: [
+      "/image/1.png",
+      "/image/2.png",
+      "/image/3.png",
+      "/image/4.png",
+      "/image/5.png",
+      "/image/6.png",
+      "/image/7.png",
+      "/image/8.png",
+      "/image/9.png",
+      "/image/10.png",
+      "/image/11.png",
+      "/image/12.png",
+      "/image/13.png",
+      "/image/14.png",
+      "/image/15.png",
+      "/image/16.png",
+      "/image/17.png",
+      "/image/18.png",
+      "/image/19.png",
+      "/image/20.png",
+    ],
     tech: [
       "/image/react.svg",
       "/image/node.svg",
@@ -27,6 +55,9 @@ const projects = [
     type: "mobile",
     desc: "Gas bill management app.",
     tech: ["/image/java.svg", "/image/sql.svg"],
+    descip:
+      "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
+    img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
     links: [
       {
         icon: "/image/github.svg",
@@ -35,10 +66,13 @@ const projects = [
     ],
   },
   {
-    src: "/image/3.png",
+    src: "/image/workdemo.png",
     name: "Todolist",
     type: "web",
     desc: "Website for todolist",
+    descip:
+      "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
+    img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
     tech: [
       "/image/react.svg",
       "/image/nextjs.svg",
@@ -58,6 +92,9 @@ const projects = [
     name: "Apple",
     type: "web",
     desc: "Landing page about iPhone.",
+    descip:
+      "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
+    img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
     tech: ["/image/html.svg", "/image/css.svg", "/image/bootstrap.svg"],
     links: [
       {
@@ -70,6 +107,23 @@ const projects = [
 
 const WorkSection = ({ isDarkMode }) => {
   const [activeTab, setActiveTab] = useState("all");
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [fullscreenImg, setFullscreenImg] = useState(null);
+
+  useEffect(() => {
+    if (selectedProject) {
+      // Khi Drawer mở
+      document.body.style.overflow = "hidden";
+    } else {
+      // Khi Drawer đóng
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup khi component bị unmount
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedProject]);
 
   const filteredProjects =
     activeTab === "all"
@@ -164,7 +218,10 @@ const WorkSection = ({ isDarkMode }) => {
             </div>
 
             {/* Overlay */}
-            <div className="absolute bottom-1 lg:bottom-4 left-3 right-3 lg:left-5 lg:right-5 rounded-2xl bg-gradient-to-r from-[#8750F7] to-[#2A1454] bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 lg:p-5">
+            <div
+              className="absolute bottom-1 lg:bottom-4 left-3 right-3 lg:left-5 lg:right-5 rounded-2xl bg-gradient-to-r from-[#8750F7] to-[#2A1454] bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 lg:p-5 cursor-pointer"
+              onClick={() => setSelectedProject(project)}
+            >
               <div className="flex flex-col items-start">
                 <h3 className="text-2xl lg:text-4xl font-semibold font-sora lg:pb-3 text-left">
                   {project.name}
@@ -182,6 +239,99 @@ const WorkSection = ({ isDarkMode }) => {
           </div>
         ))}
       </div>
+
+      {/* Drawer */}
+      {selectedProject && (
+        <div className="fixed bottom-0 left-0 right-0 h-[85vh] bg-gray-900 text-white p-6 rounded-t-3xl shadow-lg overflow-y-auto transition-transform duration-500 z-50">
+          {/* Đặt absolute để nút luôn ở góc trên bên phải */}
+          <button
+            className="absolute top-4 right-4 text-3xl lg:text-5xl z-10"
+            onClick={() => setSelectedProject(null)}
+          >
+            <IoClose />
+          </button>
+
+          {/* Tên dự án */}
+          <h1 className="text-4xl lg:text-6xl font-bold mt-5 lg:mt-4 mb-8 text-center">
+            {selectedProject.name}
+          </h1>
+
+          {/* Nội dung drawer */}
+          <div className="flex flex-col items-center gap-6">
+            {/* Carousel */}
+            <div className="w-full flex justify-center">
+              <Swiper
+                spaceBetween={20}
+                slidesPerView={1.2}
+                className="lg:w-[70%] lg:h-[420px]"
+              >
+                {selectedProject.img.map((img, idx) => (
+                  <SwiperSlide key={idx} className="relative group">
+                    <Image
+                      src={img}
+                      alt={selectedProject.name}
+                      width={500}
+                      height={300}
+                      className="w-full object-cover rounded-lg cursor-pointer"
+                      onClick={() => setFullscreenImg(img)}
+                    />
+
+                    {/* Icon ZoomOutMap */}
+                    <div
+                      className="absolute bottom-2 lg:bottom-4 right-3 h-6 w-6 lg:h-10 lg:w-10 lg:text-2xl text-base flex justify-center items-center border border-gray-700 rounded-full transition-opacity duration-300 cursor-pointer"
+                      onClick={() => setFullscreenImg(img)}
+                    >
+                      <MdOutlineZoomOutMap className="text-black" />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+
+            {/* Tech Stack và Description */}
+            <div className="w-full lg:w-[70%] text-left">
+              {/* Tech Stack */}
+              <div className="flex justify-start space-x-4 mb-4">
+                {selectedProject.tech.map((icon, i) => (
+                  <Image
+                    key={i}
+                    src={icon}
+                    alt="tech-icon"
+                    width={32}
+                    height={32}
+                    className="object-contain"
+                  />
+                ))}
+              </div>
+
+              {/* Description */}
+              <p className="text-base lg:text-lg">{selectedProject.desc}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fullscreen Image Modal */}
+      {fullscreenImg && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-50"
+          onClick={() => setFullscreenImg(null)}
+        >
+          <Image
+            src={fullscreenImg}
+            alt="Fullscreen"
+            width={1200}
+            height={900}
+            className="max-w-full max-h-full"
+          />
+          <button
+            className="absolute top-4 right-6 text-4xl text-white"
+            onClick={() => setFullscreenImg(null)}
+          >
+            <IoClose />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
