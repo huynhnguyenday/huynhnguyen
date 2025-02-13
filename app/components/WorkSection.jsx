@@ -6,130 +6,135 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MdOutlineZoomOutMap } from "react-icons/md";
 
-const projects = [
-  {
-    src: "/image/workbamos.jpeg",
-    name: "BamosCoffe",
-    type: "web",
-    desc: "Convenient water sales website with admin page.",
-    descrip1:
-      "The coffee shop website provides a modern and convenient shopping experience with an elegant, user-friendly interface. Customers can easily browse products with detailed descriptions and prices, add items to their cart, and securely pay online. The website also features news on promotions and events, store locator with integrated maps, and order history tracking for better spending management.",
-    descrip2:
-      "The powerful admin tool allows shop owners to manage products, news, and promotions easily. It supports real-time order tracking, customer management, and automated invoice and coupon distribution, optimizing marketing and enhancing customer care.",
-    img: [
-      "/image/1.png",
-      "/image/2.png",
-      "/image/3.png",
-      "/image/4.png",
-      "/image/5.png",
-      "/image/6.png",
-      "/image/7.png",
-      "/image/8.png",
-      "/image/9.png",
-      "/image/10.png",
-      "/image/11.png",
-      "/image/12.png",
-      "/image/13.png",
-      "/image/14.png",
-      "/image/15.png",
-      "/image/16.png",
-      "/image/17.png",
-      "/image/18.png",
-      "/image/19.png",
-      "/image/20.png",
-    ],
-    tech: [
-      "/image/react.svg",
-      "/image/node.svg",
-      "/image/tailwind.svg",
-      "/image/mongo.svg",
-    ],
-    links: [
-      {
-        icon: "/image/github.svg",
-        url: "https://github.com/huynhnguyenday/WebBamosCoffee",
-      },
-    ],
-  },
-  {
-    src: "/image/workgas.png",
-    name: "GasManagement",
-    type: "mobile",
-    desc: "Gas bill management app.",
-    tech: ["/image/java.svg", "/image/sql.svg"],
-    descrip1:
-      "The gas management app is designed to streamline billing and provide real-time updates on gas prices for Type 1 and Type 2. Users can easily manage invoices, track payment history, and explore detailed billing records using advanced search and filtering options. The app ensures accurate price updates, helping users stay informed about market changes.",
-    descrip2:
-      "Additionally, the app offers flexible settings that allow users to customize their experience, including toggling the display of prices and user information, as well as enabling or disabling background music. This personalized control enhances usability and user satisfaction.",
-    img: [
-      "/image/gas1.png",
-      "/image/gas2.png",
-      "/image/gas3.png",
-      "/image/gas4.png",
-      "/image/gas5.png",
-      "/image/gas6.png",
-      "/image/gas7.png",
-    ],
-    links: [
-      {
-        icon: "/image/figma.svg",
-        url: "https://www.figma.com/design/LEPiW8Lw0VMcqVYKJEPiLL/GasManagement?node-id=3-1319&t=8fomn78iU0YkWjgC-1",
-      },
-      {
-        icon: "/image/github.svg",
-        url: "https://github.com/huynhnguyenday/Mobile-application",
-      },
-    ],
-  },
-  {
-    src: "/image/workdemo.png",
-    name: "Todolist",
-    type: "web",
-    desc: "Website for todolist",
-    descrip1:
-      "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
-    img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
-    tech: [
-      "/image/react.svg",
-      "/image/nextjs.svg",
-      "/image/node.svg",
-      "/image/mongo.svg",
-    ],
-    links: [
-      { icon: "/image/global.svg", url: "https://your-todolist-website.com" },
-      {
-        icon: "/image/github.svg",
-        url: "https://github.com/your-todolist-repo",
-      },
-    ],
-  },
-  {
-    src: "/image/workapple2.png",
-    name: "iPhone",
-    type: "web",
-    desc: "Landing page about iPhone.",
-    descrip1:
-      "The iPhone introduction website provides a comprehensive overview of the latest models, featuring detailed information on pricing, product specifications, and the newest updates from Apple. Users can explore various color options and configurations available for each version, ensuring they find the perfect match for their style and needs. The site also keeps customers informed about the latest news and innovations, helping them stay up-to-date with the most advanced technology trends.",
-    img: [
-      "/image/ip1.png",
-      "/image/ip2.png",
-      "/image/ip3.png",
-      "/image/ip4.png",
-    ],
-    tech: ["/image/html.svg", "/image/css.svg", "/image/bootstrap.svg"],
-    links: [
-      {
-        icon: "/image/github.svg",
-        url: "https://github.com/huynhnguyenday/Landingpage",
-      },
-    ],
-  },
-];
-
-const WorkSection = ({ isDarkMode }) => {
+const WorkSection = ({ isDarkMode, isVietMode }) => {
   const [activeTab, setActiveTab] = useState("all");
   const [selectedProject, setSelectedProject] = useState(null);
   const [fullscreenImg, setFullscreenImg] = useState(null);
+
+  const projects = [
+    {
+      src: "/image/workbamos.jpeg",
+      name: "BamosCoffe",
+      type: "web",
+      desc: isVietMode ? "Website thức uống tiện lợi có trang quản trị." : "Convenient water sales website with admin page.",
+      descrip1: isVietMode
+        ? "Trang web quán cà phê cung cấp trải nghiệm mua sắm hiện đại và tiện lợi với giao diện thanh lịch, thân thiện với người dùng. Khách hàng có thể dễ dàng duyệt sản phẩm với mô tả và giá chi tiết, thêm sản phẩm vào giỏ hàng và thanh toán trực tuyến an toàn. Trang web cũng có tin tức về các chương trình khuyến mãi và sự kiện, định vị cửa hàng với bản đồ tích hợp và theo dõi lịch sử đơn hàng để quản lý chi tiêu tốt hơn."
+        : "The coffee shop website provides a modern and convenient shopping experience with an elegant, user-friendly interface. Customers can easily browse products with detailed descriptions and prices, add items to their cart, and securely pay online. The website also features news on promotions and events, store locator with integrated maps, and order history tracking for better spending management.",
+      descrip2: isVietMode
+        ? "Công cụ quản trị mạnh mẽ cho phép chủ cửa hàng quản lý sản phẩm, tin tức và chương trình khuyến mãi dễ dàng. Công cụ này hỗ trợ theo dõi đơn hàng theo thời gian thực, quản lý khách hàng và phân phối hóa đơn và phiếu giảm giá tự động, tối ưu hóa tiếp thị và nâng cao dịch vụ chăm sóc khách hàng."
+        : "The powerful admin tool allows shop owners to manage products, news, and promotions easily. It supports real-time order tracking, customer management, and automated invoice and coupon distribution, optimizing marketing and enhancing customer care.",
+      img: [
+        "/image/1.png",
+        "/image/2.png",
+        "/image/3.png",
+        "/image/4.png",
+        "/image/5.png",
+        "/image/6.png",
+        "/image/7.png",
+        "/image/8.png",
+        "/image/9.png",
+        "/image/10.png",
+        "/image/11.png",
+        "/image/12.png",
+        "/image/13.png",
+        "/image/14.png",
+        "/image/15.png",
+        "/image/16.png",
+        "/image/17.png",
+        "/image/18.png",
+        "/image/19.png",
+        "/image/20.png",
+      ],
+      tech: [
+        "/image/react.svg",
+        "/image/node.svg",
+        "/image/tailwind.svg",
+        "/image/mongo.svg",
+      ],
+      links: [
+        {
+          icon: "/image/github.svg",
+          url: "https://github.com/huynhnguyenday/WebBamosCoffee",
+        },
+      ],
+    },
+    {
+      src: "/image/workgas.png",
+      name: "GasManagement",
+      type: "mobile",
+      desc: isVietMode ? "App quản lý hóa đơn gas." : "Gas bill management app.",
+      tech: ["/image/java.svg", "/image/sql.svg"],
+      descrip1: isVietMode
+        ? "Ứng dụng quản lý khí được thiết kế để hợp lý hóa việc thanh toán và cung cấp thông tin cập nhật theo thời gian thực về giá khí cho Loại 1 và Loại 2. Người dùng có thể dễ dàng quản lý hóa đơn, theo dõi lịch sử thanh toán và khám phá hồ sơ thanh toán chi tiết bằng các tùy chọn tìm kiếm và lọc nâng cao. Ứng dụng đảm bảo cập nhật giá chính xác, giúp người dùng luôn cập nhật về những thay đổi của thị trường."
+        : "The gas management app is designed to streamline billing and provide real-time updates on gas prices for Type 1 and Type 2. Users can easily manage invoices, track payment history, and explore detailed billing records using advanced search and filtering options. The app ensures accurate price updates, helping users stay informed about market changes.",
+      descrip2: isVietMode
+        ? "Ngoài ra, ứng dụng cung cấp các thiết lập linh hoạt cho phép người dùng tùy chỉnh trải nghiệm của họ, bao gồm chuyển đổi hiển thị giá cả và thông tin người dùng, cũng như bật hoặc tắt nhạc nền. Kiểm soát được cá nhân hóa này nâng cao khả năng sử dụng và sự hài lòng của người dùng."
+        : "Additionally, the app offers flexible settings that allow users to customize their experience, including toggling the display of prices and user information, as well as enabling or disabling background music. This personalized control enhances usability and user satisfaction.",
+      img: [
+        "/image/gas1.png",
+        "/image/gas2.png",
+        "/image/gas3.png",
+        "/image/gas4.png",
+        "/image/gas5.png",
+        "/image/gas6.png",
+        "/image/gas7.png",
+      ],
+      links: [
+        {
+          icon: "/image/figma.svg",
+          url: "https://www.figma.com/design/LEPiW8Lw0VMcqVYKJEPiLL/GasManagement?node-id=3-1319&t=8fomn78iU0YkWjgC-1",
+        },
+        {
+          icon: "/image/github.svg",
+          url: "https://github.com/huynhnguyenday/Mobile-application",
+        },
+      ],
+    },
+    {
+      src: "/image/workdemo.png",
+      name: "Todolist",
+      type: "web",
+      desc: isVietMode ? "Website dành cho ghi chú." : "Website for todolist",
+      descrip1:
+        "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
+      img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
+      tech: [
+        "/image/react.svg",
+        "/image/nextjs.svg",
+        "/image/node.svg",
+        "/image/mongo.svg",
+      ],
+      links: [
+        { icon: "/image/global.svg", url: "https://your-todolist-website.com" },
+        {
+          icon: "/image/github.svg",
+          url: "https://github.com/your-todolist-repo",
+        },
+      ],
+    },
+    {
+      src: "/image/workapple2.png",
+      name: "iPhone",
+      type: "web",
+      desc: isVietMode ? "Website giới thiệu mẫu điện thoại iPhone sắp được ra mắt." : "Landing page about iPhone.",
+      descrip1: isVietMode
+        ? "Trang web giới thiệu iPhone cung cấp tổng quan toàn diện về các mẫu mới nhất, có thông tin chi tiết về giá cả, thông số kỹ thuật sản phẩm và các bản cập nhật mới nhất từ ​​Apple. Người dùng có thể khám phá nhiều tùy chọn màu sắc và cấu hình có sẵn cho từng phiên bản, đảm bảo họ tìm thấy sự kết hợp hoàn hảo với phong cách và nhu cầu của mình. Trang web cũng giúp khách hàng cập nhật tin tức và cải tiến mới nhất, giúp họ luôn cập nhật các xu hướng công nghệ tiên tiến nhất."
+        : "The iPhone introduction website provides a comprehensive overview of the latest models, featuring detailed information on pricing, product specifications, and the newest updates from Apple. Users can explore various color options and configurations available for each version, ensuring they find the perfect match for their style and needs. The site also keeps customers informed about the latest news and innovations, helping them stay up-to-date with the most advanced technology trends.",
+      img: [
+        "/image/ip1.png",
+        "/image/ip2.png",
+        "/image/ip3.png",
+        "/image/ip4.png",
+      ],
+      tech: ["/image/html.svg", "/image/css.svg", "/image/bootstrap.svg"],
+      links: [
+        {
+          icon: "/image/github.svg",
+          url: "https://github.com/huynhnguyenday/Landingpage",
+        },
+      ],
+    },
+  ];
 
   useEffect(() => {
     if (selectedProject) {
@@ -154,21 +159,22 @@ const WorkSection = ({ isDarkMode }) => {
   return (
     <div id="work" className="flex flex-col items-center text-center py-16">
       <h1
-        className={`text-5xl lg:text-6xl mb-4 lg:pt-8 font-extrabold text-transparent bg-clip-text ${
+        className={`text-5xl lg:text-6xl mb-4 h-24 lg:pt-8 font-extrabold text-transparent bg-clip-text ${
           isDarkMode
             ? "bg-gradient-to-r from-purple-400 to-white"
             : "bg-gradient-to-r from-purple-300 to-purple-900"
         }`}
       >
-        My Recent Works
+        {isVietMode ? "Dự án gần đây" : "My Recent Works"}
       </h1>
       <p
         className={`text-lg max-w-xl mb-8 ${
           isDarkMode ? "text-white" : "text-[#2A1454]"
         }`}
       >
-        We put your ideas and thus your wishes in the form of a unique web
-        project that inspires you and your customers.
+        {isVietMode
+          ? "Tôi đưa ý tưởng và mong muốn của bạn vào một dự án web độc đáo, truyền cảm hứng cho bạn và khách hàng của bạn."
+          : "I put your ideas and thus your wishes in the form of a unique web project that inspires you and your customers."}
       </p>
 
       {/* Tabs */}

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaFacebookF, FaLinkedinIn, FaGithub,FaInstagram } from "react-icons/fa";
 
-const FooterSection = ({ isDarkMode }) => {
+const FooterSection = ({ isDarkMode, isVietMode }) => {
 
   const handleScroll = (id) => {
     const element = document.getElementById(id);
@@ -28,10 +28,10 @@ const FooterSection = ({ isDarkMode }) => {
         }`}
       >
         {[
-          { id: "about", label: "Introduce" },
-          { id: "skills", label: "Skills" },
-          { id: "work", label: "Works" },
-          { id: "contact", label: "Contact" },
+          { id: "about", label: isVietMode ? "Giới thiệu" : "Introduce" },
+          { id: "skills", label: isVietMode ? "Kỹ năng" : "Skills" },
+          { id: "work", label: isVietMode ? "Dự án" : "Works" },
+          { id: "contact", label: isVietMode ? "Liên hệ" : "Contact" },
         ].map((link) => (
           <button
             key={link.id}
@@ -80,7 +80,10 @@ const FooterSection = ({ isDarkMode }) => {
 
       {/* Copyright */}
       <p className="mt-6 text-xs lg:text-sm text-gray-500">
-        © 2025 All rights reserved by{" "}
+        © 2025{" "}
+        {isVietMode
+          ? "tất cả các quyền được bảo lưu bởi"
+          : "All rights reserved by"}{" "}
         <span
           className={`text-sm lg:text-base font-semibold ${
             isDarkMode

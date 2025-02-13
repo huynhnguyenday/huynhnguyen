@@ -31,7 +31,7 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
         ${isDarkMode ? "bg-transparent" : "bg-[rgb(246,243,252)]"}`}
     >
       <h1
-        className={`text-5xl lg:text-6xl mb-6 lg:h-16 font-extrabold text-transparent bg-clip-text 
+        className={`text-5xl lg:text-6xl mb-6 h-16 font-extrabold text-transparent bg-clip-text 
         ${
           isDarkMode
             ? "bg-gradient-to-r from-purple-400 to-white"

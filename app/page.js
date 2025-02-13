@@ -16,7 +16,7 @@ export default function Home() {
   const [showSlideTabs, setShowSlideTabs] = useState(false);
   const [showGoTop, setShowGoTop] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isVietMode, setIsVietMode] = useState(true);
+  const [isVietMode, setIsVietMode] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
@@ -25,18 +25,6 @@ export default function Home() {
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
-
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem("isVietMode");
-    if (savedLanguage) {
-      setIsVietMode(JSON.parse(savedLanguage));
-    }
-  }, []);
-
-  // Cập nhật localStorage khi isVietMode thay đổi
-  useEffect(() => {
-    localStorage.setItem("isVietMode", JSON.stringify(isVietMode));
-  }, [isVietMode]);
 
   const handleLanguageToggle = () => {
     setIsVietMode((prevMode) => !prevMode);
@@ -213,14 +201,14 @@ export default function Home() {
             <>
               <CiLight className="w-6 h-6 flex-shrink-0" />
               <span className="mx-2 text-lg whitespace-nowrap overflow-hidden transition-all duration-300 group-hover:w-20 w-0">
-                Light
+                {isVietMode ? "Sáng" : "Light"}
               </span>
             </>
           ) : (
             <>
               <MdOutlineNightlight className="w-6 h-6 flex-shrink-0" />
               <span className="mx-2 text-lg whitespace-nowrap overflow-hidden transition-all duration-300 group-hover:w-20 w-0">
-                Night
+                {isVietMode ? "Tối" : "Dark"}
               </span>
             </>
           )}

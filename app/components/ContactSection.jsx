@@ -2,7 +2,7 @@ import React from "react";
 import { FiPhoneCall } from "react-icons/fi";
 import { IoMailOutline, IoLocationOutline } from "react-icons/io5";
 
-const ContactSection = ({isDarkMode}) => {
+const ContactSection = ({isDarkMode, isVietMode}) => {
   return (
     <div
       id="contact"
@@ -24,7 +24,7 @@ const ContactSection = ({isDarkMode}) => {
                     isDarkMode ? "text-white" : "text-[rgb(20,12,28)]"
                   }`}
                 >
-                  Phone
+                  {isVietMode ? "Điện thoại" : "Phone"}
                 </p>
                 <p
                   className={`text-lg lg:text-xl font-sora ${
@@ -70,14 +70,16 @@ const ContactSection = ({isDarkMode}) => {
                     isDarkMode ? "text-white" : "text-[rgb(20,12,28)]"
                   }`}
                 >
-                  Address
+                  {isVietMode ? "Địa chỉ" : "Address"}
                 </p>
                 <p
                   className={`text-lg lg:text-xl w-[250px] lg:w-[300px] ${
                     isDarkMode ? "text-white" : "text-[rgb(20,12,28)]"
                   }`}
                 >
-                  26b Đường 882 Phú Hữu, TP Thủ Đức, TP Hồ Chí Minh.
+                  {isVietMode
+                    ? "26b Đường 882, Phường Phú Hữu, Tp Thủ Đức."
+                    : "26b 882 Streets, Phu Huu Ward, Thu Duc City."}
                 </p>
               </div>
             </div>
@@ -86,7 +88,9 @@ const ContactSection = ({isDarkMode}) => {
           {/* Phần form nhập thông tin - Mobile nằm dưới, PC nằm trái */}
           <div
             className={`shadow-lg rounded-3xl p-3 w-full md:w-1/2 lg:p-10 mb-14 lg:mb-10 ${
-              isDarkMode ? "bg-[rgb(29,17,40)] lg:bg-[rgb(20,12,28)]" : "bg-white"
+              isDarkMode
+                ? "bg-[rgb(29,17,40)] lg:bg-[rgb(20,12,28)]"
+                : "bg-white"
             }`}
           >
             <h1
@@ -96,21 +100,22 @@ const ContactSection = ({isDarkMode}) => {
                   : "bg-gradient-to-r from-[rgb(135,80,247)] to-[rgb(42,20,84)]"
               }`}
             >
-              Let’s work together!
+              {isVietMode ? "Liên hệ với tôi nhé!" : "Let’s work together!"}
             </h1>
             <p
               className={`text-lg lg:text-base text-center flex justify-center mb-8  ${
                 isDarkMode ? "text-white" : "text-[rgb(20,12,28)]"
               }`}
             >
-              I design and code beautifully simple things and I love what I do.
-              Just simple like that!
+              {isVietMode
+                ? "Tôi thiết kế và viết mã những thứ đơn giản tuyệt đẹp và tôi yêu công việc của mình.Chỉ đơn giản như vậy thôi!"
+                : "I design and code beautifully simple things and I love what I do.Just simple like that!"}
             </p>
 
             {/* Input Name */}
             <input
               type="text"
-              placeholder="Name"
+              placeholder={isVietMode ? "Họ tên" : "Name"}
               className={`w-full p-3 border h-14 border-purple-950 rounded-xl mb-6 focus:outline-none focus:ring-2 focus:ring-purple-400 ${
                 isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
               }`}
@@ -120,14 +125,14 @@ const ContactSection = ({isDarkMode}) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder="Email"
                 className={`w-full p-3 border h-14 mb-2 border-purple-950 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 ${
                   isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
                 }`}
               />
               <input
                 type="tel"
-                placeholder="Phone Number"
+                placeholder={isVietMode ? "Số điện thoại" : "Phone Number"}
                 className={`w-full p-3 border h-14 border-purple-950 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 ${
                   isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
                 }`}
@@ -136,7 +141,7 @@ const ContactSection = ({isDarkMode}) => {
 
             {/* Message */}
             <textarea
-              placeholder="Message"
+              placeholder={isVietMode ? "Để lại tin nhắn nhé!" : "Message"}
               className={`w-full p-3 border border-purple-950 rounded-xl mt-4 mb-5 resize-y focus:outline-none focus:ring-2 focus:ring-purple-400 ${
                 isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
               }`}
@@ -146,7 +151,7 @@ const ContactSection = ({isDarkMode}) => {
             {/* Button */}
             <div className="flex justify-center">
               <button className="mb-5 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left">
-                Send Message
+                {isVietMode ? "Gửi Ngay" : "Send Message"}
               </button>
             </div>
           </div>

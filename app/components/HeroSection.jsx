@@ -15,21 +15,6 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
     onLanguageToggle(!isVietMode);
   };
 
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem("isVietMode");
-    if (savedLanguage !== null) {
-      onLanguageToggle(JSON.parse(savedLanguage));
-    } else {
-      // Nếu chưa có trong localStorage thì mặc định là tiếng Anh
-      onLanguageToggle(false);
-    }
-  }, []);
-
-
-  useEffect(() => {
-    localStorage.setItem("isVietMode", JSON.stringify(isVietMode));
-  }, [isVietMode]);
-
   const handleScroll = (id) => {
     const element = document.getElementById(id);
     if (element) {
