@@ -40,12 +40,14 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
       <nav className="flex bg-transparent items-center lg:py-4 top-0 left-0 w-full z-50">
         {/* Logo & Email */}
         <div className="flex items-center lg:ml-20 ml-4 my-4 lg:my-2">
-          <span
-            className={`text-7xl font-bold ${
-              isDarkMode ? "text-white" : "text-purple-400"
-            }`}
-          >
-            H
+          <span>
+            <Image
+              src={"/image/favicon.png"}
+              alt="Language Flag"
+              width={70}
+              height={70}
+              className="w-[50px] h-[50px] lg:w-[70px] lg:h-[70px]"
+            />
           </span>
           <span
             className={`hidden lg:block text-base ml-8 font-sora font-medium ${
@@ -78,7 +80,7 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
         </div>
 
         {/* Flag Switcher */}
-        <div className="px-10 text-2xl cursor-pointer" onClick={toggleLanguage}>
+        <div className="px-8 lg:px-10 text-2xl cursor-pointer" onClick={toggleLanguage}>
           <Image
             src={isVietMode ? "/image/flagviet.svg" : "/image/flagusa.svg"}
             alt="Language Flag"
