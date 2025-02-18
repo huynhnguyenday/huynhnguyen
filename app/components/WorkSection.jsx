@@ -16,7 +16,9 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
       src: "/image/workbamos.jpeg",
       name: "BamosCoffe",
       type: "web",
-      desc: isVietMode ? "Website thức uống tiện lợi có trang quản trị." : "Convenient water sales website with admin page.",
+      desc: isVietMode
+        ? "Website thức uống tiện lợi có trang quản trị."
+        : "Convenient water sales website with admin page.",
       descrip1: isVietMode
         ? "Trang web quán cà phê cung cấp trải nghiệm mua sắm hiện đại và tiện lợi với giao diện thanh lịch, thân thiện với người dùng. Khách hàng có thể dễ dàng duyệt sản phẩm với mô tả và giá chi tiết, thêm sản phẩm vào giỏ hàng và thanh toán trực tuyến an toàn. Trang web cũng có tin tức về các chương trình khuyến mãi và sự kiện, định vị cửa hàng với bản đồ tích hợp và theo dõi lịch sử đơn hàng để quản lý chi tiêu tốt hơn."
         : "The coffee shop website provides a modern and convenient shopping experience with an elegant, user-friendly interface. Customers can easily browse products with detailed descriptions and prices, add items to their cart, and securely pay online. The website also features news on promotions and events, store locator with integrated maps, and order history tracking for better spending management.",
@@ -62,7 +64,9 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
       src: "/image/workgas.png",
       name: "GasManagement",
       type: "mobile",
-      desc: isVietMode ? "App quản lý hóa đơn gas." : "Gas bill management app.",
+      desc: isVietMode
+        ? "App quản lý hóa đơn gas."
+        : "Gas bill management app.",
       tech: ["/image/java.svg", "/image/sql.svg"],
       descrip1: isVietMode
         ? "Ứng dụng quản lý khí được thiết kế để hợp lý hóa việc thanh toán và cung cấp thông tin cập nhật theo thời gian thực về giá khí cho Loại 1 và Loại 2. Người dùng có thể dễ dàng quản lý hóa đơn, theo dõi lịch sử thanh toán và khám phá hồ sơ thanh toán chi tiết bằng các tùy chọn tìm kiếm và lọc nâng cao. Ứng dụng đảm bảo cập nhật giá chính xác, giúp người dùng luôn cập nhật về những thay đổi của thị trường."
@@ -92,23 +96,19 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
     },
     {
       src: "/image/workdemo.png",
-      name: "Todolist",
+      name: "Process List",
       type: "web",
       desc: isVietMode ? "Website dành cho ghi chú." : "Website for todolist",
-      descrip1:
-        "Bamos Coffee is an online platform for ordering and managing coffee shop sales. The admin page allows real-time order tracking and sales analysis.",
+      descrip1: isVietMode
+        ? "Trang to do list này không chỉ giúp bạn quản lý công việc hiệu quả mà còn là nơi lưu trữ tin nhắn quan trọng. Với khả năng ghi chú tin nhắn thông minh, bạn có thể dễ dàng lưu trữ, xem lại và tìm kiếm tin nhắn theo công việc. Trang web cũng hỗ trợ kéo thả để sắp xếp công việc, xóa công việc không cần thiết và lưu trữ danh sách công việc an toàn. Giao diện thân thiện, trải nghiệm người dùng tuyệt vời và khả năng truy cập mọi nơi là những điểm nổi bật của trang to do list này. Hãy bắt đầu xây dựng trang to do list của bạn ngay hôm nay để quản lý công việc và thông tin một cách hiệu quả!"
+        : "This to-do list site not only helps you manage your tasks effectively but also stores important messages. With smart message annotation capabilities, you can easily store, review and search messages by task. The site also supports drag and drop to organize tasks, delete unnecessary tasks and store to-do lists securely. The friendly interface, great user experience and everywhere accessibility are the highlights of this to-do list site. Start building your to-do list site today to manage tasks and information effectively!",
       img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
-      tech: [
-        "/image/react.svg",
-        "/image/nextjs.svg",
-        "/image/node.svg",
-        "/image/mongo.svg",
-      ],
+      tech: ["/image/react.svg", "/image/nextjs.svg"],
       links: [
-        { icon: "/image/global.svg", url: "https://your-todolist-website.com" },
+        { icon: "/image/global.svg", url: "https://process-list.vercel.app/" },
         {
           icon: "/image/github.svg",
-          url: "https://github.com/your-todolist-repo",
+          url: "https://github.com/huynhnguyenday/Process-List",
         },
       ],
     },
@@ -116,7 +116,9 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
       src: "/image/workapple2.png",
       name: "iPhone",
       type: "web",
-      desc: isVietMode ? "Website giới thiệu mẫu điện thoại iPhone sắp được ra mắt." : "Landing page about iPhone.",
+      desc: isVietMode
+        ? "Website giới thiệu mẫu điện thoại iPhone sắp được ra mắt."
+        : "Landing page about iPhone.",
       descrip1: isVietMode
         ? "Trang web giới thiệu iPhone cung cấp tổng quan toàn diện về các mẫu mới nhất, có thông tin chi tiết về giá cả, thông số kỹ thuật sản phẩm và các bản cập nhật mới nhất từ ​​Apple. Người dùng có thể khám phá nhiều tùy chọn màu sắc và cấu hình có sẵn cho từng phiên bản, đảm bảo họ tìm thấy sự kết hợp hoàn hảo với phong cách và nhu cầu của mình. Trang web cũng giúp khách hàng cập nhật tin tức và cải tiến mới nhất, giúp họ luôn cập nhật các xu hướng công nghệ tiên tiến nhất."
         : "The iPhone introduction website provides a comprehensive overview of the latest models, featuring detailed information on pricing, product specifications, and the newest updates from Apple. Users can explore various color options and configurations available for each version, ensuring they find the perfect match for their style and needs. The site also keeps customers informed about the latest news and innovations, helping them stay up-to-date with the most advanced technology trends.",
