@@ -1,8 +1,13 @@
 import React from "react";
-import { FaFacebookF, FaLinkedinIn, FaGithub,FaInstagram } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaLinkedinIn,
+  FaGithub,
+  FaInstagram,
+} from "react-icons/fa";
+import Image from "next/image";
 
 const FooterSection = ({ isDarkMode, isVietMode }) => {
-
   const handleScroll = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -14,11 +19,19 @@ const FooterSection = ({ isDarkMode, isVietMode }) => {
     <footer className="bg-transparent pt-10 pb-3 text-center">
       {/* Logo */}
       <div
-        className={`text-7xl font-bold pb-10 ${
+        className={`flex justify-center text-7xl font-bold pb-10 ${
           isDarkMode ? "text-white" : "text-purple-400"
         }`}
       >
-        H
+        <span>
+          <Image
+            src={"/image/favicon.png"}
+            alt="Language Flag"
+            width={70}
+            height={70}
+            className="w-[70px] h-[70px] lg:w-[70px] lg:h-[70px]"
+          />
+        </span>
       </div>
 
       {/* Navigation Links */}

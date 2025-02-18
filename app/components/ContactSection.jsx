@@ -78,8 +78,8 @@ const ContactSection = ({isDarkMode, isVietMode}) => {
                   }`}
                 >
                   {isVietMode
-                    ? "26b Đường 882, Phường Phú Hữu, Tp Thủ Đức."
-                    : "26b 882 Streets, Phu Huu Ward, Thu Duc City."}
+                    ? "Phường Phú Hữu, Tp Thủ Đức."
+                    : "Phu Huu Ward, Thu Duc City."}
                 </p>
               </div>
             </div>

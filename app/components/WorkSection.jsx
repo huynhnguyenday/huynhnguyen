@@ -95,14 +95,14 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
       ],
     },
     {
-      src: "/image/workdemo.png",
+      src: "/image/worktodo.png",
       name: "Process List",
       type: "web",
       desc: isVietMode ? "Website dành cho ghi chú." : "Website for todolist",
       descrip1: isVietMode
         ? "Trang to do list này không chỉ giúp bạn quản lý công việc hiệu quả mà còn là nơi lưu trữ tin nhắn quan trọng. Với khả năng ghi chú tin nhắn thông minh, bạn có thể dễ dàng lưu trữ, xem lại và tìm kiếm tin nhắn theo công việc. Trang web cũng hỗ trợ kéo thả để sắp xếp công việc, xóa công việc không cần thiết và lưu trữ danh sách công việc an toàn. Giao diện thân thiện, trải nghiệm người dùng tuyệt vời và khả năng truy cập mọi nơi là những điểm nổi bật của trang to do list này. Hãy bắt đầu xây dựng trang to do list của bạn ngay hôm nay để quản lý công việc và thông tin một cách hiệu quả!"
         : "This to-do list site not only helps you manage your tasks effectively but also stores important messages. With smart message annotation capabilities, you can easily store, review and search messages by task. The site also supports drag and drop to organize tasks, delete unnecessary tasks and store to-do lists securely. The friendly interface, great user experience and everywhere accessibility are the highlights of this to-do list site. Start building your to-do list site today to manage tasks and information effectively!",
-      img: ["/image/workbamos.jpeg", "/image/workbamos.jpeg"],
+      img: ["/image/worktodo2.png","/image/worktodo3.png"],
       tech: ["/image/react.svg", "/image/nextjs.svg"],
       links: [
         { icon: "/image/global.svg", url: "https://process-list.vercel.app/" },
@@ -125,7 +125,7 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
       img: [
         "/image/ip1.png",
         "/image/ip2.png",
-        "/image/ip3.png",
+        "/image/ip3.png", 
         "/image/ip4.png",
       ],
       tech: ["/image/html.svg", "/image/css.svg", "/image/bootstrap.svg"],
