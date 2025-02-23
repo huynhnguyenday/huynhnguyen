@@ -171,13 +171,13 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
         {isVietMode ? "Dự án gần đây" : "My Recent Works"}
       </h1>
       <p
-        className={`text-lg max-w-xl mb-8 ${
+        className={`text-lg max-w-xl mb-8 px-1 lg:px-0 ${
           isDarkMode ? "text-white" : "text-[#2A1454]"
         }`}
       >
         {isVietMode
           ? "Tôi đưa ý tưởng và mong muốn của bạn vào một dự án web độc đáo, truyền cảm hứng cho bạn và khách hàng của bạn."
-          : "I put your ideas and thus your wishes in the form of a unique web project that inspires you and your customers."}
+          : "I transform ideas into unique, seamless web experiences that inspire, engage users, and elevate brands with creativity and functionality."}
       </p>
 
       {/* Tabs */}
