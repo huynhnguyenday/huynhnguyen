@@ -7,7 +7,6 @@ import FooterSection from "./components/FooterSection";
 import SlideTabs from "./components/SlideTabs";
 import ContactSection from "./components/ContactSection";
 import WorkSection from "./components/WorkSection";
-import SplashCursor from "./components/SplashCursor";
 import { MdOutlineNightlight } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import { GoArrowUp } from "react-icons/go";
@@ -154,7 +153,6 @@ export default function Home() {
         isVietMode={isVietMode}
         onLanguageToggle={handleLanguageToggle}
       />
-      <SplashCursor/>
 
       {/* Nút Go To Top */}
       {showGoTop && (
