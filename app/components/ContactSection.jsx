@@ -5,7 +5,7 @@ import apiService from "../services/apiService";
 
 const ContactSection = ({ isDarkMode, isVietMode }) => {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     phone: "",
     message: "",
@@ -32,7 +32,7 @@ const ContactSection = ({ isDarkMode, isVietMode }) => {
       if (result.success) {
         setSubmitStatus("success");
         setFormData({
-          name: "",
+          fullName: "",
           email: "",
           phone: "",
           message: "",
@@ -159,8 +159,8 @@ const ContactSection = ({ isDarkMode, isVietMode }) => {
               {/* Input Name */}
               <input
                 type="text"
-                name="name"
-                value={formData.name}
+                name="fullName"
+                value={formData.fullName}
                 onChange={handleInputChange}
                 placeholder={isVietMode ? "Họ tên" : "Name"}
                 className={`w-full p-3 border h-14 border-purple-950 rounded-xl mb-6 focus:outline-none focus:ring-2 focus:ring-purple-400 ${

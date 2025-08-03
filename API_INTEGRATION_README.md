@@ -69,13 +69,24 @@ async newApiCall(data) {
 
 Form liên hệ hiện tại gửi 4 trường dữ liệu:
 
-- `name`: Họ tên
+- `fullName`: Họ tên (⚠️ **QUAN TRỌNG**: Backend mong đợi `fullName`, không phải `name`)
 - `email`: Email
 - `phone`: Số điện thoại
 - `message`: Tin nhắn
 
 Khi người dùng submit form, dữ liệu sẽ được gửi đến:
 `POST https://huynhnguyen-be-production.up.railway.app/api/contact`
+
+### Backend Schema Requirements:
+
+```javascript
+{
+  fullName: String, // Required, max 100 chars
+  email: String,    // Required, valid email format
+  phone: String,    // Required, valid phone format
+  message: String   // Required, max 1000 chars
+}
+```
 
 ## Features đã implement
 
