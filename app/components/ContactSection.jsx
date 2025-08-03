@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiPhoneCall } from "react-icons/fi";
 import { IoMailOutline, IoLocationOutline } from "react-icons/io5";
+import apiService from "../services/apiService";
 
-const ContactSection = ({isDarkMode, isVietMode}) => {
+const ContactSection = ({ isDarkMode, isVietMode }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const result = await apiService.sendContactMessage(formData);
+
+      if (result.success) {
+        setSubmitStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div
       id="contact"
@@ -112,48 +155,95 @@ const ContactSection = ({isDarkMode, isVietMode}) => {
                 : "I design and code beautifully simple things and I love what I do.Just simple like that!"}
             </p>
 
-            {/* Input Name */}
-            <input
-              type="text"
-              placeholder={isVietMode ? "Họ tên" : "Name"}
-              className={`w-full p-3 border h-14 border-purple-950 rounded-xl mb-6 focus:outline-none focus:ring-2 focus:ring-purple-400 ${
-                isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
-              }`}
-            />
-
-            {/* Email & Phone - Chia cột trên desktop, xuống hàng trên mobile */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit}>
+              {/* Input Name */}
               <input
-                type="email"
-                placeholder="Email"
-                className={`w-full p-3 border h-14 mb-2 border-purple-950 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 ${
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder={isVietMode ? "Họ tên" : "Name"}
+                className={`w-full p-3 border h-14 border-purple-950 rounded-xl mb-6 focus:outline-none focus:ring-2 focus:ring-purple-400 ${
                   isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
                 }`}
+                required
               />
-              <input
-                type="tel"
-                placeholder={isVietMode ? "Số điện thoại" : "Phone Number"}
-                className={`w-full p-3 border h-14 border-purple-950 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 ${
+
+              {/* Email & Phone - Chia cột trên desktop, xuống hàng trên mobile */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="Email"
+                  className={`w-full p-3 border h-14 mb-2 border-purple-950 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 ${
+                    isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
+                  }`}
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder={isVietMode ? "Số điện thoại" : "Phone Number"}
+                  className={`w-full p-3 border h-14 border-purple-950 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 ${
+                    isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
+                  }`}
+                  required
+                />
+              </div>
+
+              {/* Message */}
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                placeholder={isVietMode ? "Để lại tin nhắn nhé!" : "Message"}
+                className={`w-full p-3 border border-purple-950 rounded-xl mt-4 mb-5 resize-y focus:outline-none focus:ring-2 focus:ring-purple-400 ${
                   isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
                 }`}
-              />
-            </div>
+                rows="4"
+                required
+              ></textarea>
 
-            {/* Message */}
-            <textarea
-              placeholder={isVietMode ? "Để lại tin nhắn nhé!" : "Message"}
-              className={`w-full p-3 border border-purple-950 rounded-xl mt-4 mb-5 resize-y focus:outline-none focus:ring-2 focus:ring-purple-400 ${
-                isDarkMode ? "bg-black" : "bg-[rgb(246,243,252)]"
-              }`}
-              rows="4"
-            ></textarea>
+              {/* Status Messages */}
+              {submitStatus === "success" && (
+                <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                  {isVietMode
+                    ? "Tin nhắn đã được gửi thành công!"
+                    : "Message sent successfully!"}
+                </div>
+              )}
 
-            {/* Button */}
-            <div className="flex justify-center">
-              <button className="mb-5 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left">
-                {isVietMode ? "Gửi Ngay" : "Send Message"}
-              </button>
-            </div>
+              {submitStatus === "error" && (
+                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                  {isVietMode
+                    ? "Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại!"
+                    : "Error sending message. Please try again!"}
+                </div>
+              )}
+
+              {/* Button */}
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`mb-5 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left ${
+                    isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                >
+                  {isSubmitting
+                    ? isVietMode
+                      ? "Đang gửi..."
+                      : "Sending..."
+                    : isVietMode
+                    ? "Gửi Ngay"
+                    : "Send Message"}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
