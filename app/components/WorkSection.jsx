@@ -62,6 +62,30 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
       ],
     },
     {
+      src: "/image/weather.png",
+      name: "Skycloud",
+      type: "web",
+      desc: isVietMode
+        ? "Website dự báo thời tiết."
+        : "Weather forecast website.",
+      descrip1: isVietMode
+        ? "Skycloud là trang web giúp bạn cập nhật nhanh chóng và chính xác tình hình thời tiết ở bất kỳ đâu. Với giao diện thân thiện, hiển thị trực quan và phù hợp với mọi loại thiết bị , bạn có thể dễ dàng theo dõi nhiệt độ, độ ẩm, tốc độ gió, lượng mưa và dự báo theo giờ hoặc theo ngày. Dữ liệu được cập nhật liên tục từ nguồn tin cậy, giúp bạn chủ động lên kế hoạch cho công việc, học tập hay du lịch một cách thuận tiện nhất."
+        : "Skycloud is a website that helps you update the weather quickly and accurately anywhere. With a friendly interface, intuitive display and suitable for all types of devices, you can easily track temperature, humidity, wind speed, rainfall and forecast by hour or by day. Data is constantly updated from reliable sources, helping you proactively plan your work, study or travel in the most convenient way.",
+      img: [
+        "/image/weather.png",
+        "/image/weatherphone.png",
+        "/image/weatheripad.png",
+      ],
+      tech: ["/image/react.svg", "/image/tailwind.svg"],
+      links: [
+        { icon: "/image/global.svg", url: "https://skycloud.vercel.app/" },
+        {
+          icon: "/image/github.svg",
+          url: "https://github.com/huynhnguyenday/sky-cloude",
+        },
+      ],
+    },
+    {
       src: "/image/workgas.png",
       name: "GasManagement",
       type: "mobile",
