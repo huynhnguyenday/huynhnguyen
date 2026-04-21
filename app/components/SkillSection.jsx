@@ -71,27 +71,38 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
         onMouseLeave={() => swiperRef.current?.autoplay.start()}
       >
         {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <div
-                key={`skill-skeleton-${index}`}
-                className={`p-4 rounded-3xl w-40 h-40 lg:w-48 lg:h-48 animate-pulse ${
-                  isDarkMode ? "bg-[rgb(29,17,40)]" : "bg-purple-100"
-                }`}
-              >
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={0}
+            slidesPerView={5}
+            pagination={false}
+            breakpoints={{
+              320: { slidesPerView: 2 },
+              640: { slidesPerView: 3 },
+              1024: { slidesPerView: 5 },
+            }}
+          >
+            {Array.from({ length: 5 }).map((_, index) => (
+              <SwiperSlide key={`skill-skeleton-${index}`}>
                 <div
-                  className={`w-20 h-20 rounded-full mx-auto mb-6 ${
-                    isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
+                  className={`p-4 rounded-3xl w-40 h-40 lg:w-48 lg:h-48 mx-auto animate-pulse ${
+                    isDarkMode ? "bg-[rgb(29,17,40)]" : "bg-purple-100"
                   }`}
-                />
-                <div
-                  className={`h-5 w-2/3 mx-auto rounded ${
-                    isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
-                  }`}
-                />
-              </div>
+                >
+                  <div
+                    className={`w-20 h-20 rounded-full mx-auto mb-6 ${
+                      isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
+                    }`}
+                  />
+                  <div
+                    className={`h-5 w-2/3 mx-auto rounded ${
+                      isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
+                    }`}
+                  />
+                </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         ) : (
           <Swiper
             ref={swiperRef}

@@ -110,27 +110,27 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
           ? Array.from({ length: 4 }).map((_, index) => (
               <div
                 key={`project-skeleton-${index}`}
-                className={`relative w-full lg:h-[500px] rounded-2xl overflow-hidden animate-pulse ${
+                className={`relative w-full h-[360px] md:h-[420px] lg:h-[500px] rounded-2xl overflow-hidden animate-pulse ${
                   isDarkMode ? "bg-[rgb(29,17,40)]" : "bg-purple-100"
                 }`}
               >
                 <div
-                  className={`absolute top-5 left-4 h-10 w-32 rounded-full ${
+                  className={`absolute top-3 lg:top-5 left-4 h-9 lg:h-10 w-28 lg:w-32 rounded-full ${
                     isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
                   }`}
                 />
                 <div
-                  className={`absolute top-5 right-4 h-10 w-20 rounded-full ${
+                  className={`absolute top-3 lg:top-5 right-4 h-9 lg:h-10 w-16 lg:w-20 rounded-full ${
                     isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
                   }`}
                 />
                 <div
-                  className={`absolute inset-x-8 top-20 bottom-24 rounded-xl ${
+                  className={`absolute inset-x-5 lg:inset-x-8 top-16 lg:top-20 bottom-24 rounded-xl ${
                     isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
                   }`}
                 />
                 <div
-                  className={`absolute left-4 right-4 bottom-4 h-20 rounded-xl ${
+                  className={`absolute left-3 right-3 lg:left-4 lg:right-4 bottom-3 lg:bottom-4 h-20 lg:h-24 rounded-xl ${
                     isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
                   }`}
                 />
