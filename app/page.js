@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import HeroSection from "./components/HeroSection";
-import SkillSection from "./components/SkillSection";
-import FooterSection from "./components/FooterSection";
 import SlideTabs from "./components/SlideTabs";
-import ContactSection from "./components/ContactSection";
-import WorkSection from "./components/WorkSection";
 import { MdOutlineNightlight } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import { GoArrowUp } from "react-icons/go";
+
+const SkillSection = dynamic(() => import("./components/SkillSection"));
+const WorkSection = dynamic(() => import("./components/WorkSection"));
+const ContactSection = dynamic(() => import("./components/ContactSection"));
+const FooterSection = dynamic(() => import("./components/FooterSection"));
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -50,6 +52,8 @@ export default function Home() {
   useEffect(() => {
     const generateStars = (numStars) => {
       const container = document.querySelector("main");
+      if (!container) return;
+      const fragment = document.createDocumentFragment();
 
       for (let i = 0; i < numStars; i++) {
         const star = document.createElement("span");
@@ -64,12 +68,13 @@ export default function Home() {
         star.style.setProperty("--random-y", randomY);
         star.style.setProperty("--random-size", randomSize);
         star.style.setProperty("--random-duration", randomDuration);
-
-        container.appendChild(star);
+        fragment.appendChild(star);
       }
+      container.appendChild(fragment);
     };
 
-    generateStars(500);
+    const isMobile = window.innerWidth < 1024;
+    generateStars(isMobile ? 80 : 140);
 
     return () => {
       const stars = document.querySelectorAll(".star");

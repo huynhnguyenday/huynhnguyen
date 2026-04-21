@@ -12,7 +12,7 @@ export default {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        sora: ["Sora", "sans-serif"],
+        sora: ["var(--font-sora)", "sans-serif"],
       },
     },
   },
