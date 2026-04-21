@@ -239,8 +239,8 @@ const ContactSection = ({ isDarkMode, isVietMode }) => {
                       ? "Đang gửi..."
                       : "Sending..."
                     : isVietMode
-                    ? "Gửi Ngay"
-                    : "Send Message"}
+                      ? "Gửi Ngay"
+                      : "Send Message"}
                 </button>
               </div>
             </form>

@@ -8,7 +8,7 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
     { id: "work", label: isVietMode ? "Dự án" : "Works" },
     { id: "contact", label: isVietMode ? "Liên hệ" : "Contact" },
   ];
-  
+
   const [position, setPosition] = useState({
     left: 0,
     width: 0,

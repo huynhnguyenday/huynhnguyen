@@ -80,7 +80,10 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
         </div>
 
         {/* Flag Switcher */}
-        <div className="px-8 lg:px-10 text-2xl cursor-pointer" onClick={toggleLanguage}>
+        <div
+          className="px-8 lg:px-10 text-2xl cursor-pointer"
+          onClick={toggleLanguage}
+        >
           <Image
             src={isVietMode ? "/image/flagviet.svg" : "/image/flagusa.svg"}
             alt="Language Flag"

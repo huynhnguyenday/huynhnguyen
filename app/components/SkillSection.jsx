@@ -1,28 +1,43 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const skills = [
-  { src: "/image/Tailwind.png", name: "Tailwind" },
-  { src: "/image/js.png", name: "JavaScript" },
-  { src: "/image/react.png", name: "React" },
-  { src: "/image/Node.png", name: "Node.js" },
-  { src: "/image/CSS3.png", name: "CSS3" },
-  { src: "/image/HTML5.png", name: "HTML5" },
-  { src: "/image/bootstrap.png", name: "Bootstrap" },
-  { src: "/image/Java.png", name: "Java" },
-  { src: "/image/Sql.png", name: "SQL" },
-  { src: "/image/MongoDB.png", name: "MongoDB" },
-  { src: "/image/figma.png", name: "Figma" },
-];
-
 const SkillSection = ({ isDarkMode, isVietMode }) => {
   const swiperRef = useRef(null);
+  const [skills, setSkills] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchSkills = async () => {
+      try {
+        const response = await fetch("/api/skills", { cache: "no-store" });
+        if (!response.ok) {
+          setSkills([]);
+          return;
+        }
+        const data = await response.json();
+        if (isMounted && Array.isArray(data)) {
+          setSkills(data);
+        }
+      } catch (error) {
+        console.error("Cannot load skills:", error);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    };
+
+    fetchSkills();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <section
@@ -55,48 +70,72 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
         onMouseEnter={() => swiperRef.current?.autoplay.stop()}
         onMouseLeave={() => swiperRef.current?.autoplay.start()}
       >
-        <Swiper
-          ref={swiperRef}
-          modules={[Pagination, Autoplay]}
-          spaceBetween={0}
-          slidesPerView={5}
-          pagination={false}
-          loop={true}
-          autoplay={{
-            delay: 800,
-            disableOnInteraction: false,
-          }}
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
-          breakpoints={{
-            320: { slidesPerView: 2 },
-            640: { slidesPerView: 3 },
-            1024: { slidesPerView: 5 },
-          }}
-        >
-          {skills.map((skill, index) => (
-            <SwiperSlide key={index}>
+        {isLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {Array.from({ length: 10 }).map((_, index) => (
               <div
-                className={`group flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-300 w-40 h-40 lg:w-48 lg:h-48 border border-transparent  
+                key={`skill-skeleton-${index}`}
+                className={`p-4 rounded-3xl w-40 h-40 lg:w-48 lg:h-48 animate-pulse ${
+                  isDarkMode ? "bg-[rgb(29,17,40)]" : "bg-purple-100"
+                }`}
+              >
+                <div
+                  className={`w-20 h-20 rounded-full mx-auto mb-6 ${
+                    isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
+                  }`}
+                />
+                <div
+                  className={`h-5 w-2/3 mx-auto rounded ${
+                    isDarkMode ? "bg-purple-900/60" : "bg-purple-200"
+                  }`}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Swiper
+            ref={swiperRef}
+            modules={[Pagination, Autoplay]}
+            spaceBetween={0}
+            slidesPerView={5}
+            pagination={false}
+            loop={true}
+            autoplay={{
+              delay: 800,
+              disableOnInteraction: false,
+            }}
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            breakpoints={{
+              320: { slidesPerView: 2 },
+              640: { slidesPerView: 3 },
+              1024: { slidesPerView: 5 },
+            }}
+          >
+            {skills.map((skill, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  className={`group flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-300 w-40 h-40 lg:w-48 lg:h-48 border border-transparent  
     ${
       isDarkMode
         ? "lg:bg-[rgb(20,11,28)] bg-[rgb(29,17,40)] hover:bg-[rgb(135,80,247)] hover:border-purple-400 hover:bg-opacity-50 hover:backdrop-blur-lg text-white"
         : "bg-white hover:bg-[rgb(42,20,84)] hover:border-none text-[#2A1454] hover:text-purple-400"
     }`}
-              >
-                <div className="w-20 h-20 relative transition-transform duration-300 group-hover:scale-125 mb-6">
-                  <Image
-                    src={skill.src}
-                    alt={skill.name}
-                    layout="fill"
-                    objectFit="contain"
-                    objectPosition="center"
-                  />
+                >
+                  <div className="w-20 h-20 relative transition-transform duration-300 group-hover:scale-125 mb-6">
+                    <Image
+                      src={skill.src}
+                      alt={skill.name}
+                      layout="fill"
+                      objectFit="contain"
+                      objectPosition="center"
+                    />
+                  </div>
+                  <span className="text-xl font-bold">{skill.name}</span>
                 </div>
-                <span className="text-xl font-bold">{skill.name}</span>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
     </section>
   );

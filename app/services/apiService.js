@@ -1,13 +1,7 @@
-import env from "../../env.config.js";
-
 class ApiService {
-  constructor() {
-    this.baseURL = env.API_BASE_URL;
-  }
-
   // Gửi thông tin liên hệ
   async sendContactMessage(contactData) {
-    const url = `${this.baseURL}${env.API_CONTACT_ENDPOINT}`;
+    const url = "/api/contact";
     const requestBody = JSON.stringify(contactData);
 
     console.log("🚀 Sending request to:", url);
@@ -26,7 +20,7 @@ class ApiService {
       console.log("📡 Response status:", response.status);
       console.log(
         "📡 Response headers:",
-        Object.fromEntries(response.headers.entries())
+        Object.fromEntries(response.headers.entries()),
       );
 
       if (!response.ok) {
@@ -63,4 +57,5 @@ class ApiService {
   }
 }
 
-export default new ApiService();
+const apiService = new ApiService();
+export default apiService;
