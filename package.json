@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
-    "framer-motion": "^12.38.0",
     "mongodb": "^7.2.0",
     "next": "^16.2.4",
     "react": "^19.2.5",

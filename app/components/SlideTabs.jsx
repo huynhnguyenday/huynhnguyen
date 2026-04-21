@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
 
 const SlideTabs = ({ isDarkMode, isVietMode }) => {
   const sections = [
@@ -148,9 +147,12 @@ const Tab = ({ id, children, setPosition, onClick, tabRefs }) => {
 
 const Cursor = ({ position, isDarkMode }) => {
   return (
-    <motion.li
-      animate={{
-        ...position,
+    <li
+      style={{
+        left: position.left,
+        width: position.width,
+        opacity: position.opacity,
+        transition: "left 220ms ease, width 220ms ease, opacity 180ms ease",
       }}
       className={`absolute z-0 h-7 rounded-full md:h-10 ${
         isDarkMode ? "bg-white" : "bg-black"

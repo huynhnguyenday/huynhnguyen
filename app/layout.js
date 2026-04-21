@@ -5,7 +5,7 @@ const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
+  preload: false,
   weight: ["400", "600", "700"],
 });
 

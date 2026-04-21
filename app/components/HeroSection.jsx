@@ -249,6 +249,7 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
             width={350}
             height={300}
             priority
+            fetchPriority="high"
             sizes="(min-width: 1024px) 350px, 100vw"
             className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-950 hover:border-purple-400 transition-transform duration-300"
           />
