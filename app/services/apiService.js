@@ -18,10 +18,6 @@ class ApiService {
       });
 
       console.log("📡 Response status:", response.status);
-      console.log(
-        "📡 Response headers:",
-        Object.fromEntries(response.headers.entries()),
-      );
 
       if (!response.ok) {
         // Thử đọc error message từ response

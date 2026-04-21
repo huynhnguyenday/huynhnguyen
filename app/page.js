@@ -8,10 +8,54 @@ import { MdOutlineNightlight } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import { GoArrowUp } from "react-icons/go";
 
-const SkillSection = dynamic(() => import("./components/SkillSection"));
-const WorkSection = dynamic(() => import("./components/WorkSection"));
-const ContactSection = dynamic(() => import("./components/ContactSection"));
-const FooterSection = dynamic(() => import("./components/FooterSection"));
+const SkillSection = dynamic(() => import("./components/SkillSection"), {
+  ssr: false,
+});
+const WorkSection = dynamic(() => import("./components/WorkSection"), {
+  ssr: false,
+});
+const ContactSection = dynamic(() => import("./components/ContactSection"), {
+  ssr: false,
+});
+const FooterSection = dynamic(() => import("./components/FooterSection"), {
+  ssr: false,
+});
+
+const LazyMountSection = ({ children, className = "", minHeight = "320px" }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const placeholderRef = useRef(null);
+
+  useEffect(() => {
+    const node = placeholderRef.current;
+    if (!node || isVisible) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  return (
+    <section ref={placeholderRef} className={className} style={{ minHeight }}>
+      {isVisible ? (
+        children
+      ) : (
+        <div className="mx-auto max-w-7xl px-4 py-10">
+          <div className="h-8 w-52 rounded-lg bg-purple-300/20 animate-pulse mb-6" />
+          <div className="h-4 w-full max-w-2xl rounded bg-purple-300/20 animate-pulse" />
+        </div>
+      )}
+    </section>
+  );
+};
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -83,29 +127,26 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setShowSlideTabs(window.scrollY > 300); // Hiển thị khi cuộn xuống 100px
-    };
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setShowSlideTabs(window.scrollY > 300);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const scrollProgressRef = { current: 0 };
-
-    const handleScroll = () => {
       const scrollY = window.scrollY;
       const pageHeight =
         document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollY / pageHeight) * 100;
 
-      scrollProgressRef.current = scrollPercent;
-      setScrollProgress(scrollPercent); // Cập nhật UI nhưng không gây render lại quá nhiều
+      setScrollProgress(scrollPercent);
       setShowGoTop(scrollPercent > 1);
+        ticking = false;
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -115,7 +156,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto lg:py-2 transition-all duration-300">
+    <main className="relative flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)] mx-auto lg:py-2 transition-colors duration-300">
       <HeroSection
         isDarkMode={isDarkMode}
         isVietMode={isVietMode}
@@ -124,7 +165,7 @@ export default function Home() {
 
       {/* SlideTabs - Fixed nhưng chỉ hiển thị khi cuộn */}
       <div
-        className={`fixed z-40 top-5 left-0 w-full transition-all duration-300 
+        className={`fixed z-40 top-5 left-0 w-full transition-transform transition-opacity duration-300 
           ${
             showSlideTabs
               ? "opacity-100 translate-y-0"
@@ -138,26 +179,34 @@ export default function Home() {
           onLanguageToggle={handleLanguageToggle}
         />
       </div>
-      <SkillSection
-        isDarkMode={isDarkMode}
-        isVietMode={isVietMode}
-        onLanguageToggle={handleLanguageToggle}
-      />
-      <WorkSection
-        isDarkMode={isDarkMode}
-        isVietMode={isVietMode}
-        onLanguageToggle={handleLanguageToggle}
-      />
-      <ContactSection
-        isDarkMode={isDarkMode}
-        isVietMode={isVietMode}
-        onLanguageToggle={handleLanguageToggle}
-      />
-      <FooterSection
-        isDarkMode={isDarkMode}
-        isVietMode={isVietMode}
-        onLanguageToggle={handleLanguageToggle}
-      />
+      <LazyMountSection minHeight="680px">
+        <SkillSection
+          isDarkMode={isDarkMode}
+          isVietMode={isVietMode}
+          onLanguageToggle={handleLanguageToggle}
+        />
+      </LazyMountSection>
+      <LazyMountSection minHeight="940px">
+        <WorkSection
+          isDarkMode={isDarkMode}
+          isVietMode={isVietMode}
+          onLanguageToggle={handleLanguageToggle}
+        />
+      </LazyMountSection>
+      <LazyMountSection minHeight="620px">
+        <ContactSection
+          isDarkMode={isDarkMode}
+          isVietMode={isVietMode}
+          onLanguageToggle={handleLanguageToggle}
+        />
+      </LazyMountSection>
+      <LazyMountSection minHeight="200px">
+        <FooterSection
+          isDarkMode={isDarkMode}
+          isVietMode={isVietMode}
+          onLanguageToggle={handleLanguageToggle}
+        />
+      </LazyMountSection>
 
       {/* Nút Go To Top */}
       {showGoTop && (

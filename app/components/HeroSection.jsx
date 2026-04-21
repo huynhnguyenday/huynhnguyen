@@ -165,7 +165,10 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
               alt="Background"
               width={250}
               height={220}
-              className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-900 hover:border-purple-400 transition-all duration-300"
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 1023px) 250px, 100vw"
+              className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-900 hover:border-purple-400 transition-transform duration-300"
             />
           </div>
           <p
@@ -247,7 +250,7 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
             height={300}
             priority
             sizes="(min-width: 1024px) 350px, 100vw"
-            className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-950 hover:border-purple-400 transition-all duration-300"
+            className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-950 hover:border-purple-400 transition-transform duration-300"
           />
         </div>
       </div>

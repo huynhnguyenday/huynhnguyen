@@ -136,9 +136,9 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
                     <Image
                       src={skill.src}
                       alt={skill.name}
-                      layout="fill"
-                      objectFit="contain"
-                      objectPosition="center"
+                      fill
+                      sizes="(min-width: 1024px) 80px, 72px"
+                      className="object-contain object-center"
                     />
                   </div>
                   <span className="text-xl font-bold">{skill.name}</span>

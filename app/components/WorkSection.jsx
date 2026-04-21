@@ -180,6 +180,8 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
                 alt={project.name}
                 width={500}
                 height={300}
+                sizes="(min-width: 1024px) 550px, (min-width: 768px) 46vw, 90vw"
+                quality={70}
                 className="lg:w-[550px] lg:h-[460px] transition-transform duration-300"
               />
             </div>

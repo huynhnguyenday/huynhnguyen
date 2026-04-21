@@ -93,7 +93,7 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
     <ul
       onMouseLeave={handleMouseLeave} // Khi rời chuột, về vị trí tab active
       className={`relative mx-auto flex w-fit rounded-full border-2 
-              backdrop-blur-sm p-1 transition-all duration-200
+              backdrop-blur-sm p-1 transition-colors duration-200
               ${
                 isDarkMode
                   ? "bg-black/50 border-gray-500 text-white"
