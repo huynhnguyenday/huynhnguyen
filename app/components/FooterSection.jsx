@@ -5,7 +5,6 @@ import {
   FaGithub,
   FaInstagram,
 } from "react-icons/fa";
-import Image from "next/image";
 
 const FooterSection = ({ isDarkMode, isVietMode }) => {
   const handleScroll = (id) => {
@@ -17,26 +16,9 @@ const FooterSection = ({ isDarkMode, isVietMode }) => {
 
   return (
     <footer className="bg-transparent pt-10 pb-3 text-center">
-      {/* Logo */}
-      <div
-        className={`flex justify-center text-7xl font-bold pb-10 ${
-          isDarkMode ? "text-white" : "text-purple-400"
-        }`}
-      >
-        <span>
-          <Image
-            src={"/image/favicon.png"}
-            alt="Language Flag"
-            width={70}
-            height={70}
-            className="w-[70px] h-[70px] lg:w-[70px] lg:h-[70px]"
-          />
-        </span>
-      </div>
-
       {/* Navigation Links */}
       <div
-        className={`flex justify-center gap-8 pb-6 mt-4 text-sm md:text-base ${
+        className={`flex justify-center gap-8 pb-6 text-sm md:text-base ${
           isDarkMode ? "text-white" : "text-[#2A1454]"
         }`}
       >

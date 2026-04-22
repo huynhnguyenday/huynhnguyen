@@ -42,19 +42,10 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
     <section id="about" className="lg:px-12">
       {/* Navbar */}
       <nav className="flex bg-transparent items-center lg:py-4 top-0 left-0 w-full z-50">
-        {/* Logo & Email */}
+        {/* Email */}
         <div className="flex items-center lg:ml-20 ml-4 my-4 lg:my-2">
-          <span>
-            <Image
-              src={"/image/favicon.png"}
-              alt="Language Flag"
-              width={70}
-              height={70}
-              className="w-[50px] h-[50px] lg:w-[70px] lg:h-[70px]"
-            />
-          </span>
           <span
-            className={`hidden lg:block text-base ml-8 font-sora font-medium ${
+            className={`hidden lg:block text-base font-sora font-medium ${
               isDarkMode ? "text-white" : "text-[#2A1454]"
             }`}
           >
