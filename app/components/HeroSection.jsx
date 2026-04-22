@@ -141,6 +141,20 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
             </a>
           ))}
 
+          <button
+            onClick={toggleLanguage}
+            className="w-fit mt-4 transition"
+            aria-label={isVietMode ? "Chuyển sang tiếng Anh" : "Switch to Vietnamese"}
+          >
+            <Image
+              src={isVietMode ? "/image/flagusa.svg" : "/image/flagviet.svg"}
+              alt={isVietMode ? "USA Flag" : "Vietnam Flag"}
+              width={32}
+              height={32}
+              className="transition-transform duration-300 hover:scale-110"
+            />
+          </button>
+
           {/* Email at the bottom */}
           <div className="mt-auto pb-28 text-start text-white text-lg">
             huynhbutforwork@gmail.com

@@ -20,6 +20,7 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
   const [clickedSection, setClickedSection] = useState(null); // Lưu tab được click
   const tabRefs = useRef({});
   const timeoutRef = useRef(null);
+  const activeSectionRef = useRef("");
   const visibleSections = useMemo(
     () =>
       isMobileView
@@ -35,6 +36,18 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
     updateViewMode();
     window.addEventListener("resize", updateViewMode);
     return () => window.removeEventListener("resize", updateViewMode);
+  }, []);
+
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   // Xử lý cuộn tới phần tương ứng
@@ -75,7 +88,8 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
       });
 
       if (currentSection && tabRefs.current[currentSection]) {
-        if (currentSection !== activeSection) {
+        if (currentSection !== activeSectionRef.current) {
+          activeSectionRef.current = currentSection;
           setActiveSection(currentSection); // Cập nhật section đang active
         }
         const ref = tabRefs.current[currentSection];
@@ -102,7 +116,7 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
     handleScroll(); // Gọi ngay khi load trang để cập nhật vị trí ban đầu
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeSection, clickedSection, visibleSections]);
+  }, [clickedSection, visibleSections]);
 
   // Khi rời chuột khỏi tab, đặt lại con trỏ về vị trí của tab đang active
   const handleMouseLeave = () => {
