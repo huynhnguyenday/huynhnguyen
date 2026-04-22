@@ -49,22 +49,31 @@ const FooterSection = ({ isDarkMode, isVietMode }) => {
           {
             icon: <FaFacebookF />,
             link: "https://www.facebook.com/imodnoliub",
+            label: "Facebook",
           },
           {
             icon: <FaLinkedinIn />,
             link: "https://www.linkedin.com/in/hu%E1%BB%B3nh-nguy%E1%BB%85n-h%E1%BB%AFu/",
+            label: "LinkedIn",
           },
-          { icon: <FaGithub />, link: "https://github.com/huynhnguyenday" },
+          {
+            icon: <FaGithub />,
+            link: "https://github.com/huynhnguyenday",
+            label: "GitHub",
+          },
           {
             icon: <FaInstagram />,
             link: "https://www.instagram.com/hhuyn._.hn/",
+            label: "Instagram",
           },
-        ].map(({ icon, link }, index) => (
+        ].map(({ icon, link, label }, index) => (
           <a
             key={index}
             href={link}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={label}
+            title={label}
             className={`w-10 h-10 flex items-center justify-center ${
               isDarkMode
                 ? "bg-black text-purple-400"

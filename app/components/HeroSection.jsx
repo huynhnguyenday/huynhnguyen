@@ -108,6 +108,7 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
             isDarkMode ? "text-white" : "text-purple-500"
           }`}
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Đóng menu điều hướng" : "Mở menu điều hướng"}
         >
           {isOpen ? <FaXmark /> : <FaBarsStaggered />}
         </button>
@@ -228,36 +229,39 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
                 {
                   icon: <FaFacebookF />,
                   link: "https://www.facebook.com/imodnoliub",
+                  label: "Facebook",
                 },
                 {
                   icon: <FaLinkedinIn />,
                   link: "https://www.linkedin.com/in/hu%E1%BB%B3nh-nguy%E1%BB%85n-h%E1%BB%AFu/",
+                  label: "LinkedIn",
                 },
                 {
                   icon: <FaGithub />,
                   link: "https://github.com/huynhnguyenday",
+                  label: "GitHub",
                 },
                 {
                   icon: <FaInstagram />,
                   link: "https://www.instagram.com/hhuyn._.hn/",
+                  label: "Instagram",
                 },
-              ].map(({ icon, link }, index) => (
+              ].map(({ icon, link, label }, index) => (
                 <a
                   key={index}
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  <button
-                    className={`w-10 h-10 flex items-center justify-center ${
-                      isDarkMode
-                        ? "bg-black text-purple-400"
-                        : "bg-white text-[#8750F7]"
-                    } border border-purple-400 rounded-full 
+                  aria-label={label}
+                  title={label}
+                  className={`w-10 h-10 flex items-center justify-center ${
+                    isDarkMode
+                      ? "bg-black text-purple-400"
+                      : "bg-white text-[#8750F7]"
+                  } border border-purple-400 rounded-full 
           hover:bg-purple-400 hover:text-white transition-transform duration-200 hover:scale-95`}
-                  >
-                    <span className="text-xl hover:text-white">{icon}</span>
-                  </button>
+                >
+                  <span className="text-xl hover:text-white">{icon}</span>
                 </a>
               ))}
             </div>

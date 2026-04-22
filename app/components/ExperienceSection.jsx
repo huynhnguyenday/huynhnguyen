@@ -43,9 +43,9 @@ const ExperienceSection = ({ isDarkMode, isVietMode }) => {
                 : "bg-[rgb(246,243,252)] border-purple-200 text-[#2A1454]"
             }`}
           >
-            <h3 className="text-xl lg:text-2xl font-bold">
+            <h2 className="text-xl lg:text-2xl font-bold">
               Ho Chi Minh City University of Economics and FINANCE
-            </h3>
+            </h2>
             <p className="mt-2 text-base lg:text-lg font-semibold text-purple-400">
               Software Engineering
             </p>
@@ -60,9 +60,9 @@ const ExperienceSection = ({ isDarkMode, isVietMode }) => {
                 : "bg-[rgb(246,243,252)] border-purple-200 text-[#2A1454]"
             }`}
           >
-            <h3 className="text-xl lg:text-2xl font-bold">
+            <h2 className="text-xl lg:text-2xl font-bold">
               TEKVIZON SOFTWARE CO., LTD
-            </h3>
+            </h2>
             <p className="mt-2 text-base lg:text-lg font-semibold text-purple-400">
               Fresher FullStack Developer
             </p>
@@ -81,7 +81,7 @@ const ExperienceSection = ({ isDarkMode, isVietMode }) => {
                 : "bg-[rgb(246,243,252)] border-purple-200 text-[#2A1454]"
             }`}
           >
-            <h3 className="text-xl lg:text-2xl font-bold">BYD OWAY AUTO</h3>
+            <h2 className="text-xl lg:text-2xl font-bold">BYD OWAY AUTO</h2>
             <p className="mt-2 text-base lg:text-lg font-semibold text-purple-400">
               PHP Developer
             </p>
