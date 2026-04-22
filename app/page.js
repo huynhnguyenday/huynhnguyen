@@ -14,6 +14,12 @@ const SkillSection = dynamic(() => import("./components/SkillSection"), {
 const WorkSection = dynamic(() => import("./components/WorkSection"), {
   ssr: false,
 });
+const ExperienceSection = dynamic(
+  () => import("./components/ExperienceSection"),
+  {
+    ssr: false,
+  }
+);
 const ContactSection = dynamic(() => import("./components/ContactSection"), {
   ssr: false,
 });
@@ -21,7 +27,12 @@ const FooterSection = dynamic(() => import("./components/FooterSection"), {
   ssr: false,
 });
 
-const LazyMountSection = ({ children, className = "", minHeight = "320px" }) => {
+const LazyMountSection = ({
+  children,
+  className = "",
+  minHeight = "320px",
+  anchorId,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const placeholderRef = useRef(null);
 
@@ -44,7 +55,12 @@ const LazyMountSection = ({ children, className = "", minHeight = "320px" }) => 
   }, [isVisible]);
 
   return (
-    <section ref={placeholderRef} className={className} style={{ minHeight }}>
+    <section
+      ref={placeholderRef}
+      id={!isVisible ? anchorId : undefined}
+      className={className}
+      style={{ minHeight }}
+    >
       {isVisible ? (
         children
       ) : (
@@ -179,21 +195,28 @@ export default function Home() {
           onLanguageToggle={handleLanguageToggle}
         />
       </div>
-      <LazyMountSection minHeight="680px">
+      <LazyMountSection minHeight="720px" anchorId="experience">
+        <ExperienceSection
+          isDarkMode={isDarkMode}
+          isVietMode={isVietMode}
+          onLanguageToggle={handleLanguageToggle}
+        />
+      </LazyMountSection>
+      <LazyMountSection minHeight="680px" anchorId="skills">
         <SkillSection
           isDarkMode={isDarkMode}
           isVietMode={isVietMode}
           onLanguageToggle={handleLanguageToggle}
         />
       </LazyMountSection>
-      <LazyMountSection minHeight="940px">
+      <LazyMountSection minHeight="940px" anchorId="work">
         <WorkSection
           isDarkMode={isDarkMode}
           isVietMode={isVietMode}
           onLanguageToggle={handleLanguageToggle}
         />
       </LazyMountSection>
-      <LazyMountSection minHeight="620px">
+      <LazyMountSection minHeight="620px" anchorId="contact">
         <ContactSection
           isDarkMode={isDarkMode}
           isVietMode={isVietMode}

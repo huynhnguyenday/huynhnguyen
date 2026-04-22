@@ -1,12 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 
 const SlideTabs = ({ isDarkMode, isVietMode }) => {
   const sections = [
     { id: "about", label: isVietMode ? "Giới thiệu" : "Introduce" },
+    { id: "experience", label: isVietMode ? "Kinh nghiệm" : "Experience" },
     { id: "skills", label: isVietMode ? "Kỹ năng" : "Skills" },
     { id: "work", label: isVietMode ? "Dự án" : "Works" },
     { id: "contact", label: isVietMode ? "Liên hệ" : "Contact" },
   ];
+  const [isMobileView, setIsMobileView] = useState(false);
 
   const [position, setPosition] = useState({
     left: 0,
@@ -18,6 +20,22 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
   const [clickedSection, setClickedSection] = useState(null); // Lưu tab được click
   const tabRefs = useRef({});
   const timeoutRef = useRef(null);
+  const visibleSections = useMemo(
+    () =>
+      isMobileView
+        ? sections.filter((section) => section.id !== "about")
+        : sections,
+    [isMobileView, isVietMode]
+  );
+
+  useEffect(() => {
+    const updateViewMode = () => {
+      setIsMobileView(window.innerWidth < 768);
+    };
+    updateViewMode();
+    window.addEventListener("resize", updateViewMode);
+    return () => window.removeEventListener("resize", updateViewMode);
+  }, []);
 
   // Xử lý cuộn tới phần tương ứng
   const handleScroll = (id) => {
@@ -45,7 +63,7 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
       let currentSection = "";
       let minDistance = window.innerHeight;
 
-      sections.forEach((section) => {
+      visibleSections.forEach((section) => {
         const element = document.getElementById(section.id);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -57,13 +75,25 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
       });
 
       if (currentSection && tabRefs.current[currentSection]) {
-        setActiveSection(currentSection); // Cập nhật section đang active
+        if (currentSection !== activeSection) {
+          setActiveSection(currentSection); // Cập nhật section đang active
+        }
         const ref = tabRefs.current[currentSection];
         const { width } = ref.getBoundingClientRect();
-        setPosition({
-          left: ref.offsetLeft,
-          width,
-          opacity: 1,
+        setPosition((prev) => {
+          const next = {
+            left: ref.offsetLeft,
+            width,
+            opacity: 1,
+          };
+          if (
+            prev.left === next.left &&
+            prev.width === next.width &&
+            prev.opacity === next.opacity
+          ) {
+            return prev;
+          }
+          return next;
         });
       }
     };
@@ -72,7 +102,7 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
     handleScroll(); // Gọi ngay khi load trang để cập nhật vị trí ban đầu
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [clickedSection]);
+  }, [activeSection, clickedSection, visibleSections]);
 
   // Khi rời chuột khỏi tab, đặt lại con trỏ về vị trí của tab đang active
   const handleMouseLeave = () => {
@@ -99,7 +129,7 @@ const SlideTabs = ({ isDarkMode, isVietMode }) => {
                   : "bg-white/60 border-gray-300 text-black"
               }`}
     >
-      {sections.map(({ id, label }) => (
+      {visibleSections.map(({ id, label }) => (
         <Tab
           key={id}
           id={id}

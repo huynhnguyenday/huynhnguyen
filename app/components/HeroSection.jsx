@@ -58,52 +58,58 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
           </span>
         </div>
 
-        {/* Navigation Links (Desktop) */}
-        <div className="hidden md:flex ml-[300px] gap-14 text-base font-bold font-sora">
-          {[
-            { id: "about", label: isVietMode ? "Giới thiệu" : "Introduce" },
-            { id: "skills", label: isVietMode ? "Kỹ năng" : "Skills" },
-            { id: "work", label: isVietMode ? "Dự án" : "Works" },
-            { id: "contact", label: isVietMode ? "Liên hệ" : "Contact" },
-          ].map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleScroll(link.id)}
-              className={`relative group ${
-                isDarkMode ? "text-white" : "text-[#2A1454]"
-              } transition`}
-            >
-              {link.label}
-              <span className="absolute left-0 bottom-[-4px] rounded-full w-0 h-[3px] bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-          ))}
-        </div>
+        <div className="hidden md:flex ml-auto items-center">
+          {/* Navigation Links (Desktop) */}
+          <div className="flex gap-8 xl:gap-14 text-base font-bold font-sora">
+            {[
+              { id: "about", label: isVietMode ? "Giới thiệu" : "Introduce" },
+              {
+                id: "experience",
+                label: isVietMode ? "Kinh nghiệm" : "Experience",
+              },
+              { id: "skills", label: isVietMode ? "Kỹ năng" : "Skills" },
+              { id: "work", label: isVietMode ? "Dự án" : "Works" },
+              { id: "contact", label: isVietMode ? "Liên hệ" : "Contact" },
+            ].map((link) => (
+              <button
+                key={link.id}
+                onClick={() => handleScroll(link.id)}
+                className={`relative group ${
+                  isDarkMode ? "text-white" : "text-[#2A1454]"
+                } transition`}
+              >
+                {link.label}
+                <span className="absolute left-0 bottom-[-4px] rounded-full w-0 h-[3px] bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
+              </button>
+            ))}
+          </div>
 
-        {/* Flag Switcher */}
-        <div
-          className="px-8 lg:px-10 text-2xl cursor-pointer"
-          onClick={toggleLanguage}
-        >
-          <Image
-            src={isVietMode ? "/image/flagviet.svg" : "/image/flagusa.svg"}
-            alt="Language Flag"
-            width={32}
-            height={32}
-            className="transition-transform duration-300 hover:scale-110"
-          />
-        </div>
+          {/* Flag Switcher */}
+          <div
+            className="px-5 lg:px-8 xl:px-10 text-2xl cursor-pointer"
+            onClick={toggleLanguage}
+          >
+            <Image
+              src={isVietMode ? "/image/flagviet.svg" : "/image/flagusa.svg"}
+              alt="Language Flag"
+              width={32}
+              height={32}
+              className="transition-transform duration-300 hover:scale-110"
+            />
+          </div>
 
-        {/* Hire Me Button */}
-        <button
-          onClick={() => handleScroll("contact")} // Thêm sự kiện này
-          className="ml-0 lg:ml-0 px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left"
-        >
-          {isVietMode ? "Liên Hệ!" : "Hire Me!"}
-        </button>
+          {/* Hire Me Button */}
+          <button
+            onClick={() => handleScroll("contact")} // Thêm sự kiện này
+            className="px-8 py-[15px] text-base text-white rounded-full transition-all duration-300 font-sora font-bold bg-[linear-gradient(90deg,_rgb(42,20,84)_0%,_rgb(135,80,247)_51%,_rgb(42,20,84)_100%)] bg-[length:300%_100%] bg-right hover:bg-left"
+          >
+            {isVietMode ? "Liên Hệ!" : "Hire Me!"}
+          </button>
+        </div>
 
         {/* FAB Menu Button (Mobile) */}
         <button
-          className={`md:hidden ml-4 text-[48px] ${
+          className={`md:hidden ml-auto mr-4 text-[48px] ${
             isDarkMode ? "text-white" : "text-purple-500"
           }`}
           onClick={() => setIsOpen(!isOpen)}
@@ -117,6 +123,10 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
         <div className="fixed top-[94px] left-0 w-full h-[calc(100vh-75px)] bg-[rgb(42,20,84)] flex flex-col pl-6 pt-2 z-40">
           {[
             { href: "#about", label: isVietMode ? "GIỚI THIỆU" : "INTRODUCE" },
+            {
+              href: "#experience",
+              label: isVietMode ? "KINH NGHIỆM" : "EXPERIENCE",
+            },
             { href: "#skills", label: isVietMode ? "KỸ NĂNG" : "SKILLS" },
             { href: "#work", label: isVietMode ? "DỰ ÁN" : "WORKS" },
             { href: "#contact", label: isVietMode ? "LIÊN HỆ" : "CONTACT" },
