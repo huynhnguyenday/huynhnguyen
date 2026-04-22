@@ -1,16 +1,21 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
 const SkillSection = ({ isDarkMode, isVietMode }) => {
-  const swiperRef = useRef(null);
   const [skills, setSkills] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const displaySkills = useMemo(() => {
+    if (skills.length > 0 && skills.length <= 5) {
+      return [...skills, ...skills];
+    }
+    return skills;
+  }, [skills]);
 
   useEffect(() => {
     let isMounted = true;
@@ -65,21 +70,17 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
           : "I put your ideas and thus your wishes in the form of a unique project that inspires you and your customers."}
       </p>
 
-      <div
-        className="max-w-6xl mx-auto pl-6 lg:pl-0"
-        onMouseEnter={() => swiperRef.current?.autoplay.stop()}
-        onMouseLeave={() => swiperRef.current?.autoplay.start()}
-      >
+      <div className="max-w-6xl mx-auto pl-6 lg:pl-0">
         {isLoading ? (
           <Swiper
             modules={[Pagination]}
             spaceBetween={0}
-            slidesPerView={5}
+            slidesPerView={5.5}
             pagination={false}
             breakpoints={{
-              320: { slidesPerView: 2 },
-              640: { slidesPerView: 3 },
-              1024: { slidesPerView: 5 },
+              320: { slidesPerView: 2.2 },
+              640: { slidesPerView: 3.2 },
+              1024: { slidesPerView: 4.7 },
             }}
           >
             {Array.from({ length: 5 }).map((_, index) => (
@@ -105,25 +106,18 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
           </Swiper>
         ) : (
           <Swiper
-            ref={swiperRef}
-            modules={[Pagination, Autoplay]}
+            modules={[Pagination]}
             spaceBetween={0}
-            slidesPerView={5}
+            slidesPerView={5.5}
             pagination={false}
-            loop={true}
-            autoplay={{
-              delay: 800,
-              disableOnInteraction: false,
-            }}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
             breakpoints={{
-              320: { slidesPerView: 2 },
-              640: { slidesPerView: 3 },
-              1024: { slidesPerView: 5 },
+              320: { slidesPerView: 2.2 },
+              640: { slidesPerView: 3.2 },
+              1024: { slidesPerView: 5.5 },
             }}
           >
-            {skills.map((skill, index) => (
-              <SwiperSlide key={index}>
+            {displaySkills.map((skill, index) => (
+              <SwiperSlide key={`${skill.name}-${index}`}>
                 <div
                   className={`group flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-300 w-40 h-40 lg:w-48 lg:h-48 border border-transparent  
     ${

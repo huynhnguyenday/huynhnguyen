@@ -252,7 +252,7 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
         </div>
 
         {/* Ảnh hiển thị bên phải trên màn hình lớn */}
-        <div className="col-span-5 mt-16 lg:ml-8 lg:mt-0 hidden lg:block">
+        <div className="col-span-5 mt-16 lg:ml-8 lg:mt-0 hidden lg:block lg:pl-20">
           <Image
             src="/image/img-bg2.png"
             alt="Background"
