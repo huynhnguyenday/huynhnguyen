@@ -10,8 +10,12 @@ import { FaInstagram } from "react-icons/fa";
 
 const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const cvLink = isVietMode ? "/cv-vi.pdf" : "/cv-en.pdf";
+  const cvDownloadName = isVietMode
+    ? "FullStack Developer - Nguyễn Hữu Huỳnh.pdf"
+    : "FullStack Developer - Nguyen Huu Huynh.pdf";
 
-  const toggleLanguage = () => {
+  const toggleLanguage = () => {  
     onLanguageToggle(!isVietMode);
   };
 
@@ -144,7 +148,9 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
           <button
             onClick={toggleLanguage}
             className="w-fit mt-4 transition"
-            aria-label={isVietMode ? "Chuyển sang tiếng Anh" : "Switch to Vietnamese"}
+            aria-label={
+              isVietMode ? "Chuyển sang tiếng Anh" : "Switch to Vietnamese"
+            }
           >
             <Image
               src={isVietMode ? "/image/flagusa.svg" : "/image/flagviet.svg"}
@@ -208,7 +214,9 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
           {/* Chỉnh sửa flex để các icon nằm ngang bên phải nút Download */}
           <div className="flex flex-col lg:flex-row items-center mt-12">
             {/* Nút Download CV */}
-            <button
+            <a
+              href={cvLink}
+              download={cvDownloadName}
               className={`relative overflow-hidden ${
                 isDarkMode
                   ? "bg-black text-purple-400"
@@ -221,7 +229,7 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
                 <MdOutlineFileDownload className="ml-2 text-4xl font-thin" />
               </span>
               <span className="absolute inset-0 bg-purple-400 scale-y-0 origin-bottom transition-transform duration-500 group-hover:scale-y-100"></span>
-            </button>
+            </a>
 
             {/* Các Icon Mạng Xã Hội */}
             <div className="flex lg:ml-6 gap-4 mt-6 lg:mt-0">
