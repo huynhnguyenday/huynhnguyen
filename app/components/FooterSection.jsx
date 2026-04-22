@@ -42,6 +42,10 @@ const FooterSection = ({ isDarkMode, isVietMode }) => {
       >
         {[
           { id: "about", label: isVietMode ? "Giới thiệu" : "Introduce" },
+          {
+            id: "experience",
+            label: isVietMode ? "Kinh nghiệm" : "Experience",
+          },
           { id: "skills", label: isVietMode ? "Kỹ năng" : "Skills" },
           { id: "work", label: isVietMode ? "Dự án" : "Works" },
           { id: "contact", label: isVietMode ? "Liên hệ" : "Contact" },
