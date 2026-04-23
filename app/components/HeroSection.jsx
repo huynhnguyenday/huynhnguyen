@@ -183,7 +183,7 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
           {/* Ảnh chỉ hiển thị trên mobile */}
           <div className="flex lg:hidden justify-center my-8">
             <Image
-              src="/image/img-bg2.png"
+              src="/image/img-bg2.jpg"
               alt="Background"
               width={250}
               height={220}
@@ -271,7 +271,7 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
         {/* Ảnh hiển thị bên phải trên màn hình lớn */}
         <div className="col-span-5 mt-16 lg:ml-8 lg:mt-0 hidden lg:block lg:pl-20">
           <Image
-            src="/image/img-bg2.png"
+            src="/image/img-bg2.jpg"
             alt="Background"
             width={350}
             height={300}
