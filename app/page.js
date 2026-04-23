@@ -202,7 +202,7 @@ export default function Home() {
           onLanguageToggle={handleLanguageToggle}
         />
       </LazyMountSection>
-      <LazyMountSection minHeight="680px" anchorId="skills">
+      <LazyMountSection minHeight="520px" anchorId="skills">
         <SkillSection
           isDarkMode={isDarkMode}
           isVietMode={isVietMode}
@@ -216,7 +216,7 @@ export default function Home() {
           onLanguageToggle={handleLanguageToggle}
         />
       </LazyMountSection>
-      <LazyMountSection minHeight="620px" anchorId="contact">
+      <LazyMountSection minHeight="500px" anchorId="contact">
         <ContactSection
           isDarkMode={isDarkMode}
           isVietMode={isVietMode}

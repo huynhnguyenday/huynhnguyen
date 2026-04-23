@@ -49,9 +49,11 @@ const ContactSection = ({ isDarkMode, isVietMode }) => {
   return (
     <div
       id="contact"
-      className={`${isDarkMode ? "bg-transparent" : "bg-[rgb(246,243,252)]"}`}
+      className={`pt-8 lg:pt-12 pb-16 lg:pb-24 ${
+        isDarkMode ? "bg-transparent" : "bg-[rgb(246,243,252)]"
+      }`}
     >
-      <div className="max-w-7xl mx-auto p-6 lg:py-24">
+      <div className="max-w-7xl mx-auto p-6">
         {/* Container tổng - Form bên trái, thông tin bên phải trên PC, ngược lại trên mobile */}
         <div className="flex flex-col md:flex-row-reverse items-start gap-8">
           {/* Phần thông tin liên hệ - Mobile nằm trên, PC nằm phải */}

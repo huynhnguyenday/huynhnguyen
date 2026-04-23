@@ -4,7 +4,7 @@ const ExperienceSection = ({ isDarkMode, isVietMode }) => {
   return (
     <section
       id="experience"
-      className={`pt-16 lg:pt-24 pb-24 ${
+      className={`pt-16 lg:pt-24 pb-16 lg:pb-24 ${
         isDarkMode ? "bg-transparent" : "bg-white"
       }`}
     >

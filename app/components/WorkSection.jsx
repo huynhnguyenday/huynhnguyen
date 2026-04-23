@@ -67,7 +67,10 @@ const WorkSection = ({ isDarkMode, isVietMode }) => {
       : projects.filter((p) => p.type === activeTab);
 
   return (
-    <div id="work" className="flex flex-col items-center text-center py-16">
+    <div
+      id="work"
+      className="flex flex-col items-center text-center pt-8 lg:pt-8 pb-16 lg:pb-24"
+    >
       <h1
         className={`text-5xl lg:text-6xl mb-4 h-24 lg:pt-8 font-extrabold text-transparent bg-clip-text ${
           isDarkMode
