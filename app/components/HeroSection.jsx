@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import heroImage from "../../public/image/img-bg2.jpg";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -183,14 +184,12 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
           {/* Ảnh chỉ hiển thị trên mobile */}
           <div className="flex lg:hidden justify-center my-8">
             <Image
-              src="/image/img-bg2.jpg"
+              src={heroImage}
               alt="Background"
-              width={250}
-              height={220}
               priority
               fetchPriority="high"
-              sizes="(max-width: 1023px) 250px, 100vw"
-              className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-900 hover:border-purple-400 transition-transform duration-300"
+              sizes="250px"
+              className="w-[250px] h-auto rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-900 hover:border-purple-400 transition-transform duration-300"
             />
           </div>
           <p
@@ -271,14 +270,12 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
         {/* Ảnh hiển thị bên phải trên màn hình lớn */}
         <div className="col-span-5 mt-16 lg:ml-8 lg:mt-0 hidden lg:block lg:pl-20">
           <Image
-            src="/image/img-bg2.jpg"
+            src={heroImage}
             alt="Background"
-            width={350}
-            height={300}
             priority
             fetchPriority="high"
-            sizes="(min-width: 1024px) 350px, 100vw"
-            className="rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-950 hover:border-purple-400 transition-transform duration-300"
+            sizes="350px"
+            className="w-[350px] h-auto rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-950 hover:border-purple-400 transition-transform duration-300"
           />
         </div>
       </div>

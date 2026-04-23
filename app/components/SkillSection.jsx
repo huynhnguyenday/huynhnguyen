@@ -7,6 +7,7 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
   const [skills, setSkills] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const marqueeRef = useRef(null);
+  const halfWidthRef = useRef(0);
   const isHoveringRef = useRef(false);
   const isDraggingRef = useRef(false);
   const dragStartXRef = useRef(0);
@@ -47,11 +48,23 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
     const marqueeElement = marqueeRef.current;
     if (!marqueeElement || isLoading || skills.length === 0) return;
 
+    const updateHalfWidth = () => {
+      halfWidthRef.current = marqueeElement.scrollWidth / 2;
+    };
+    updateHalfWidth();
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateHalfWidth();
+    });
+    resizeObserver.observe(marqueeElement);
+
+    window.addEventListener("resize", updateHalfWidth);
+
     let animationFrameId = null;
     const speedPerFrame = 0.6;
 
     const normalizeLoopPosition = () => {
-      const halfWidth = marqueeElement.scrollWidth / 2;
+      const halfWidth = halfWidthRef.current;
       if (halfWidth <= 0) return;
 
       if (marqueeElement.scrollLeft >= halfWidth) {
@@ -74,6 +87,8 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
       if (animationFrameId) {
         window.cancelAnimationFrame(animationFrameId);
       }
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateHalfWidth);
     };
   }, [isLoading, skills.length]);
 
@@ -81,7 +96,7 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
     const marqueeElement = marqueeRef.current;
     if (!marqueeElement) return;
 
-    const halfWidth = marqueeElement.scrollWidth / 2;
+    const halfWidth = halfWidthRef.current;
     if (halfWidth <= 0) return;
 
     if (marqueeElement.scrollLeft >= halfWidth) {

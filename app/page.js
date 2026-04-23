@@ -144,27 +144,38 @@ export default function Home() {
 
   useEffect(() => {
     let ticking = false;
+    let pageHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const recalcPageHeight = () => {
+      pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+    };
+
     const handleScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         setShowSlideTabs(window.scrollY > 300);
 
-      const scrollY = window.scrollY;
-      const pageHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollY / pageHeight) * 100;
+        const scrollY = window.scrollY;
+        const safePageHeight = pageHeight > 0 ? pageHeight : 1;
+        const scrollPercent = (scrollY / safePageHeight) * 100;
 
-      setScrollProgress(scrollPercent);
-      setShowGoTop(scrollPercent > 1);
+        setScrollProgress(scrollPercent);
+        setShowGoTop(scrollPercent > 1);
         ticking = false;
       });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", recalcPageHeight, { passive: true });
+    recalcPageHeight();
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", recalcPageHeight);
+    };
   }, []);
 
   const scrollToTop = () => {
