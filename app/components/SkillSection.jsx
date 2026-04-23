@@ -1,20 +1,19 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
 
 const SkillSection = ({ isDarkMode, isVietMode }) => {
   const [skills, setSkills] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const marqueeRef = useRef(null);
+  const isHoveringRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollLeftRef = useRef(0);
   const displaySkills = useMemo(() => {
-    if (skills.length > 0 && skills.length <= 5) {
-      return [...skills, ...skills];
-    }
-    return skills;
+    if (skills.length === 0) return [];
+    return [...skills, ...skills];
   }, [skills]);
 
   useEffect(() => {
@@ -44,6 +43,78 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const marqueeElement = marqueeRef.current;
+    if (!marqueeElement || isLoading || skills.length === 0) return;
+
+    let animationFrameId = null;
+    const speedPerFrame = 0.6;
+
+    const normalizeLoopPosition = () => {
+      const halfWidth = marqueeElement.scrollWidth / 2;
+      if (halfWidth <= 0) return;
+
+      if (marqueeElement.scrollLeft >= halfWidth) {
+        marqueeElement.scrollLeft -= halfWidth;
+      } else if (marqueeElement.scrollLeft < 0) {
+        marqueeElement.scrollLeft += halfWidth;
+      }
+    };
+
+    const tick = () => {
+      if (!isHoveringRef.current && !isDraggingRef.current) {
+        marqueeElement.scrollLeft += speedPerFrame;
+        normalizeLoopPosition();
+      }
+      animationFrameId = window.requestAnimationFrame(tick);
+    };
+
+    animationFrameId = window.requestAnimationFrame(tick);
+    return () => {
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [isLoading, skills.length]);
+
+  const normalizeScrollLeft = () => {
+    const marqueeElement = marqueeRef.current;
+    if (!marqueeElement) return;
+
+    const halfWidth = marqueeElement.scrollWidth / 2;
+    if (halfWidth <= 0) return;
+
+    if (marqueeElement.scrollLeft >= halfWidth) {
+      marqueeElement.scrollLeft -= halfWidth;
+    } else if (marqueeElement.scrollLeft < 0) {
+      marqueeElement.scrollLeft += halfWidth;
+    }
+  };
+
+  const handlePointerDown = (event) => {
+    const marqueeElement = marqueeRef.current;
+    if (!marqueeElement) return;
+
+    isHoveringRef.current = true;
+    isDraggingRef.current = true;
+    dragStartXRef.current = event.clientX;
+    dragStartScrollLeftRef.current = marqueeElement.scrollLeft;
+    marqueeElement.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    const marqueeElement = marqueeRef.current;
+    if (!marqueeElement || !isDraggingRef.current) return;
+
+    const distanceX = event.clientX - dragStartXRef.current;
+    marqueeElement.scrollLeft = dragStartScrollLeftRef.current - distanceX;
+    normalizeScrollLeft();
+  };
+
+  const endDragging = () => {
+    isDraggingRef.current = false;
+  };
+
   return (
     <section
       id="skills"
@@ -72,19 +143,12 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
 
       <div className="max-w-6xl mx-auto pl-6 lg:pl-0">
         {isLoading ? (
-          <Swiper
-            modules={[Pagination]}
-            spaceBetween={0}
-            slidesPerView={5.5}
-            pagination={false}
-            breakpoints={{
-              320: { slidesPerView: 2.2 },
-              640: { slidesPerView: 3.2 },
-              1024: { slidesPerView: 4.7 },
-            }}
-          >
+          <div className="flex gap-4 lg:gap-6 overflow-hidden pr-6 lg:pr-0">
             {Array.from({ length: 5 }).map((_, index) => (
-              <SwiperSlide key={`skill-skeleton-${index}`}>
+              <div
+                key={`skill-skeleton-${index}`}
+                className="skills-marquee-item"
+              >
                 <div
                   className={`p-4 rounded-3xl w-40 h-40 lg:w-48 lg:h-48 mx-auto animate-pulse ${
                     isDarkMode ? "bg-[rgb(29,17,40)]" : "bg-purple-100"
@@ -101,45 +165,69 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
                     }`}
                   />
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </div>
         ) : (
-          <Swiper
-            modules={[Pagination]}
-            spaceBetween={0}
-            slidesPerView={5.5}
-            pagination={false}
-            breakpoints={{
-              320: { slidesPerView: 2.2 },
-              640: { slidesPerView: 3.2 },
-              1024: { slidesPerView: 5.5 },
+          <div
+            ref={marqueeRef}
+            className="skills-marquee pr-6 lg:pr-0"
+            onDragStart={(event) => event.preventDefault()}
+            onMouseEnter={() => {
+              isHoveringRef.current = true;
+            }}
+            onMouseLeave={() => {
+              isHoveringRef.current = false;
+              endDragging();
+            }}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={(event) => {
+              const marqueeElement = marqueeRef.current;
+              if (marqueeElement?.hasPointerCapture(event.pointerId)) {
+                marqueeElement.releasePointerCapture(event.pointerId);
+              }
+              endDragging();
+            }}
+            onPointerCancel={(event) => {
+              const marqueeElement = marqueeRef.current;
+              if (marqueeElement?.hasPointerCapture(event.pointerId)) {
+                marqueeElement.releasePointerCapture(event.pointerId);
+              }
+              endDragging();
             }}
           >
-            {displaySkills.map((skill, index) => (
-              <SwiperSlide key={`${skill.name}-${index}`}>
+            <div className="skills-marquee-track">
+              {displaySkills.map((skill, index) => (
                 <div
-                  className={`group flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-300 w-40 h-40 lg:w-48 lg:h-48 border border-transparent  
+                  key={`${skill.name}-${index}`}
+                  className="skills-marquee-item"
+                  aria-hidden={index >= skills.length}
+                >
+                  <div
+                    className={`group flex flex-col items-center justify-center p-4 rounded-3xl transition-all duration-300 w-40 h-40 lg:w-48 lg:h-48 border border-transparent  
     ${
       isDarkMode
         ? "lg:bg-[rgb(20,11,28)] bg-[rgb(29,17,40)] hover:bg-[rgb(135,80,247)] hover:border-purple-400 hover:bg-opacity-50 hover:backdrop-blur-lg text-white"
         : "bg-white hover:bg-[rgb(42,20,84)] hover:border-none text-[#2A1454] hover:text-purple-400"
     }`}
-                >
-                  <div className="w-20 h-20 relative transition-transform duration-300 group-hover:scale-125 mb-6">
-                    <Image
-                      src={skill.src}
-                      alt={skill.name}
-                      fill
-                      sizes="(min-width: 1024px) 80px, 72px"
-                      className="object-contain object-center"
-                    />
+                  >
+                    <div className="w-20 h-20 relative transition-transform duration-300 group-hover:scale-125 mb-6">
+                      <Image
+                        src={skill.src}
+                        alt={skill.name}
+                        fill
+                        draggable={false}
+                        sizes="(min-width: 1024px) 80px, 72px"
+                        className="object-contain object-center pointer-events-none select-none"
+                      />
+                    </div>
+                    <span className="text-xl font-bold">{skill.name}</span>
                   </div>
-                  <span className="text-xl font-bold">{skill.name}</span>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </section>
