@@ -6,6 +6,7 @@ import Image from "next/image";
 const SkillSection = ({ isDarkMode, isVietMode }) => {
   const [skills, setSkills] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
   const marqueeRef = useRef(null);
   const halfWidthRef = useRef(0);
   const isHoveringRef = useRef(false);
@@ -45,8 +46,19 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
   }, []);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const syncViewport = () => {
+      setIsDesktop(mediaQuery.matches);
+    };
+
+    syncViewport();
+    mediaQuery.addEventListener("change", syncViewport);
+    return () => mediaQuery.removeEventListener("change", syncViewport);
+  }, []);
+
+  useEffect(() => {
     const marqueeElement = marqueeRef.current;
-    if (!marqueeElement || isLoading || skills.length === 0) return;
+    if (!marqueeElement || isLoading || skills.length === 0 || isDesktop) return;
 
     const updateHalfWidth = () => {
       halfWidthRef.current = marqueeElement.scrollWidth / 2;
@@ -90,7 +102,7 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
       resizeObserver.disconnect();
       window.removeEventListener("resize", updateHalfWidth);
     };
-  }, [isLoading, skills.length]);
+  }, [isLoading, skills.length, isDesktop]);
 
   const normalizeScrollLeft = () => {
     const marqueeElement = marqueeRef.current;
@@ -107,6 +119,7 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
   };
 
   const handlePointerDown = (event) => {
+    if (isDesktop) return;
     const marqueeElement = marqueeRef.current;
     if (!marqueeElement) return;
 
@@ -118,6 +131,7 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
   };
 
   const handlePointerMove = (event) => {
+    if (isDesktop) return;
     const marqueeElement = marqueeRef.current;
     if (!marqueeElement || !isDraggingRef.current) return;
 
@@ -186,14 +200,20 @@ const SkillSection = ({ isDarkMode, isVietMode }) => {
         ) : (
           <div
             ref={marqueeRef}
-            className="skills-marquee pr-6 lg:pr-0"
+            className={`skills-marquee pr-6 lg:pr-0 ${
+              isDesktop ? "skills-marquee-desktop" : ""
+            }`}
             onDragStart={(event) => event.preventDefault()}
             onMouseEnter={() => {
-              isHoveringRef.current = true;
+              if (!isDesktop) {
+                isHoveringRef.current = true;
+              }
             }}
             onMouseLeave={() => {
-              isHoveringRef.current = false;
-              endDragging();
+              if (!isDesktop) {
+                isHoveringRef.current = false;
+                endDragging();
+              }
             }}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}

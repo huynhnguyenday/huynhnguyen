@@ -86,8 +86,30 @@ main span.star {
 }
 
 @media (min-width: 1024px) {
+  .skills-marquee-desktop {
+    cursor: default;
+  }
+
   .skills-marquee-track {
     gap: 1.5rem;
+  }
+
+  .skills-marquee-desktop .skills-marquee-track {
+    animation: skills-marquee-scroll-desktop 28s linear infinite;
+    will-change: transform;
+  }
+
+  .skills-marquee-desktop:hover .skills-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes skills-marquee-scroll-desktop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 0.75rem));
   }
 }
 
