@@ -11,6 +11,7 @@ import { FaInstagram } from "react-icons/fa";
 
 const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const cvLink = isVietMode ? "/cv-vi.pdf" : "/cv-en.pdf";
   const cvDownloadName = isVietMode
     ? "FullStack Developer - Nguyễn Hữu Huỳnh.pdf"
@@ -26,6 +27,17 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const syncViewport = () => {
+      setIsDesktop(mediaQuery.matches);
+    };
+
+    syncViewport();
+    mediaQuery.addEventListener("change", syncViewport);
+    return () => mediaQuery.removeEventListener("change", syncViewport);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -182,16 +194,19 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
           </h2>
 
           {/* Ảnh chỉ hiển thị trên mobile */}
-          <div className="flex lg:hidden justify-center my-8">
-            <Image
-              src={heroImage}
-              alt="Background"
-              priority
-              fetchPriority="high"
-              sizes="250px"
-              className="w-[250px] h-auto rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-900 hover:border-purple-400 transition-transform duration-300"
-            />
-          </div>
+          {!isDesktop && (
+            <div className="flex justify-center my-8">
+              <Image
+                src={heroImage}
+                alt="Background"
+                priority
+                fetchPriority="high"
+                quality={60}
+                sizes="(max-width: 1023px) 250px, 250px"
+                className="w-[250px] h-auto rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-900 hover:border-purple-400 transition-transform duration-300"
+              />
+            </div>
+          )}
           <p
             className={`${
               isDarkMode ? "text-white" : "text-[#2A1454]"
@@ -268,16 +283,19 @@ const HeroSection = ({ isDarkMode, onLanguageToggle, isVietMode }) => {
         </div>
 
         {/* Ảnh hiển thị bên phải trên màn hình lớn */}
-        <div className="col-span-5 mt-16 lg:ml-8 lg:mt-0 hidden lg:block lg:pl-20">
-          <Image
-            src={heroImage}
-            alt="Background"
-            priority
-            fetchPriority="high"
-            sizes="350px"
-            className="w-[350px] h-auto rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-950 hover:border-purple-400 transition-transform duration-300"
-          />
-        </div>
+        {isDesktop && (
+          <div className="col-span-5 mt-16 lg:ml-8 lg:mt-0 lg:block lg:pl-20">
+            <Image
+              src={heroImage}
+              alt="Background"
+              loading="eager"
+              fetchPriority="high"
+              quality={75}
+              sizes="350px"
+              className="w-[350px] h-auto rounded-3xl rotate-6 hover:rotate-0 border-2 border-indigo-950 hover:border-purple-400 transition-transform duration-300"
+            />
+          </div>
+        )}
       </div>
     </section>
   );
